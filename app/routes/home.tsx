@@ -1,4 +1,4 @@
-import { Button } from "~/common/components/ui/button";
+import { HomePage } from "~/pages/home-page";
 import type { Route } from "./+types/home";
 
 export function meta({}: Route.MetaArgs) {
@@ -9,5 +9,5 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
-  return <div></div>;
+  return <HomePage />;
 }
