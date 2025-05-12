@@ -1,4 +1,7 @@
 import { Link } from "react-router";
+import { menus } from "../config";
+import { cn } from "../lib/utils";
+import { Button } from "./ui/button";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -6,141 +9,48 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
 } from "./ui/navigation-menu";
+import { Separator } from "./ui/separator";
 
-const menus = [
-  {
-    name: "Products",
-    to: "/products",
-    items: [
-      {
-        name: "Leaderboards",
-        description: "See the top performers in your community",
-        to: "/products/leaderboards",
-      },
-      {
-        name: "Categories",
-        description: "See the top categories in your community",
-        to: "/products/categories",
-      },
-      {
-        name: "Search",
-        description: "Search for a product",
-        to: "/products/search",
-      },
-      {
-        name: "Submit a Product",
-        description: "Submit a product to our community",
-        to: "/products/submit",
-      },
-      {
-        name: "Promote",
-        description: "Promote a product to our community",
-        to: "/products/promote",
-        isPaid: true,
-      },
-    ],
-  },
-  {
-    name: "Jobs",
-    to: "/jobs",
-    items: [
-      {
-        name: "Remote Jobs",
-        description: "Find a remote job in our community",
-        to: "/jobs?location=remote",
-      },
-      {
-        name: "Full-Time Jobs",
-        description: "Find a full-time job in our community",
-        to: "/jobs?type=full-time",
-      },
-      {
-        name: "Freelance Jobs",
-        description: "Find a freelance job in our community",
-        to: "/jobs?type=freelance",
-      },
-      {
-        name: "Internships",
-        description: "Find an internship in our community",
-        to: "/jobs?type=internship",
-      },
-      {
-        name: "Submit a Job",
-        description: "Submit a job to our community",
-        to: "/jobs/submit",
-        isPaid: true,
-      },
-    ],
-  },
-  {
-    name: "Community",
-    to: "/community",
-    items: [
-      {
-        name: "All Posts",
-        description: "See all posts in our community",
-        to: "/community",
-      },
-      {
-        name: "Top Posts",
-        description: "See the top posts in our community",
-        to: "/community?sort=top",
-      },
-      {
-        name: "New Posts",
-        description: "See the new posts in our community",
-        to: "/community?sort=new",
-      },
-      {
-        name: "Create a Post",
-        description: "Create a post in our community",
-        to: "/community/create",
-      },
-    ],
-  },
-  {
-    name: "IdeasGPT",
-    to: "/ideas",
-  },
-  {
-    name: "Teams",
-    to: "/teams",
-    items: [
-      {
-        name: "All Teams",
-        description: "See all teams in our community",
-        to: "/teams",
-      },
-      {
-        name: "Create a Team",
-        description: "Create a team in our community",
-        to: "/teams/create",
-      },
-    ],
-  },
-];
+interface NavigationProps {
+  isLoggedIn: boolean;
+}
 
-export const Navigation = () => {
+export const Navigation = ({ isLoggedIn }: NavigationProps) => {
   return (
-    <nav className="w-full flex items-center h-16 fixed top-0 left-0 bg-background/50 backdrop-blur px-20">
-      <div>
+    <nav className="bg-background/50 fixed top-0 left-0 flex h-16 w-full items-center justify-between px-20 backdrop-blur">
+      <div className="flex items-center">
+        <Link to="/" className="text-lg font-bold tracking-tighter">
+          WEMAKE
+        </Link>
+        <Separator orientation="vertical" className="ml-4 !h-6" />
         <NavigationMenu>
           <NavigationMenuList>
             {menus.map((menu) => {
               if ((menu?.items?.length || 0) > 0)
                 return (
-                  <NavigationMenuItem key={menu.to}>
+                  <NavigationMenuItem key={menu.name}>
                     <Link to={menu.to}>
                       <NavigationMenuTrigger>{menu.name}</NavigationMenuTrigger>
                     </Link>
                     <NavigationMenuContent>
-                      <ul className="w-[600px] grid grid-cols-2 gap-4">
+                      <ul className="grid w-[600px] grid-cols-2 gap-4 p-2">
                         {menu.items?.map((item) => {
                           return (
-                            <NavigationMenuItem key={item.to}>
-                              <NavigationMenuLink href={item.to} asChild>
-                                <Link to={item.to}>
+                            <NavigationMenuItem
+                              key={item.to}
+                              className={cn([item.isPaid && "col-span-2"])}
+                            >
+                              <NavigationMenuLink asChild>
+                                <Link
+                                  to={item.to}
+                                  className={cn([
+                                    "select-none, rounded-md",
+                                    item.isPaid &&
+                                      "bg-primary/10 hover:bg-primary/30 focus:bg-primary/30",
+                                  ])}
+                                >
                                   <span className="font-bold">{item.name}</span>
                                   <p className="text-muted-foreground">
                                     {item.description}
@@ -156,10 +66,11 @@ export const Navigation = () => {
                 );
               else {
                 return (
-                  <NavigationMenuItem>
-                    <NavigationMenuLink key={menu.to} href={menu.to}>
-                      {menu.name}
-                    </NavigationMenuLink>
+                  <NavigationMenuItem
+                    key={menu.name}
+                    className={navigationMenuTriggerStyle()}
+                  >
+                    <Link to={menu.to}>{menu.name}</Link>
                   </NavigationMenuItem>
                 );
               }
@@ -167,6 +78,16 @@ export const Navigation = () => {
           </NavigationMenuList>
         </NavigationMenu>
       </div>
+      {isLoggedIn ? (
+        <div className="flex items-center gap-4">
+          <Button asChild variant="secondary">
+            <Link to="/auth/login">Login</Link>
+          </Button>
+          <Button asChild>
+            <Link to="/auth/signup">Join</Link>
+          </Button>
+        </div>
+      ) : null}
     </nav>
   );
 };
