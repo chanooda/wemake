@@ -32,7 +32,7 @@ export function NewProductCard({
     <Link to={LINK.PRODUCT(id)} className="w-full">
       <Card className="space-between flex flex-row gap-4 px-6">
         <CardHeader className="w-full p-0">
-          <CardTitle>{title}</CardTitle>
+          <CardTitle className="text-lg">{title}</CardTitle>
           <CardDescription>{description}</CardDescription>
           <div className="text-muted-foreground flex gap-2">
             <div className="flex items-center gap-1">

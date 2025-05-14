@@ -28,8 +28,8 @@ export const LINK = {
   JOBS_SUBMIT: "/jobs/submit",
 
   // Community
-  COMMUNITY: "/community",
-  COMMUNITY_ALL_POSTS: "/community",
+  COMMUNITIES: "/community",
+  COMMUNITY: (id: string) => `/community/${id}`,
   COMMUNITY_TOP_POSTS: "/community?sort=top",
   COMMUNITY_NEW_POSTS: "/community?sort=new",
   COMMUNITY_CREATE_POST: "/community/create",
@@ -126,12 +126,12 @@ export const linkMenus = [
   },
   {
     name: "Community",
-    to: LINK.COMMUNITY,
+    to: LINK.COMMUNITIES,
     items: [
       {
         name: "All Posts",
         description: "See all posts in our community",
-        to: LINK.COMMUNITY_ALL_POSTS,
+        to: LINK.COMMUNITIES,
       },
       {
         name: "Top Posts",
