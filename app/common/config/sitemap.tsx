@@ -4,10 +4,15 @@ import {
   SettingsIcon,
   UserIcon,
 } from "lucide-react";
+import type { MetaDescriptors } from "react-router/route-module";
 
 export const LINK = {
+  // Home
+  HOME: "/",
+
   // Products
-  PRODUCT: "/products",
+  PRODUCT: (id: string) => `/products/${id}`,
+  PRODUCTS: "/products",
   PRODUCT_LEADERBOARDS: "/products/leaderboards",
   PRODUCT_CATEGORIES: "/products/categories",
   PRODUCT_SEARCH: "/products/search",
@@ -57,7 +62,7 @@ export const LINK = {
 export const linkMenus = [
   {
     name: "Products",
-    to: LINK.PRODUCT,
+    to: LINK.PRODUCTS,
     items: [
       {
         name: "Leaderboards",
@@ -179,3 +184,14 @@ export const dropdownMenus = (id: string) => [
     items: [{ name: "Logout", to: LINK.AUTH_LOGOUT, icon: <LogOutIcon /> }],
   },
 ];
+
+const getMetadataTitle = (title: string) => {
+  return `${title} | Wemake`;
+};
+
+export const metadata: Record<string, MetaDescriptors> = {
+  [LINK.HOME]: [
+    { title: getMetadataTitle("Home") },
+    { name: "Home", content: "Welcome to Wemake" },
+  ],
+};
