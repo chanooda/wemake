@@ -2,11 +2,11 @@ import { Link } from "react-router";
 import { Button } from "~/common/components/ui/button";
 import { H2, TypographyLarge } from "~/common/components/ui/typography";
 import { LINK, metadata } from "~/common/config";
-import { DiscussionCard } from "~/pages/community/ui/discussion-card";
-import { IdeaCard } from "~/pages/idea/ui/idea-card";
-import { JobCard } from "~/pages/job/ui/job-card";
-import { NewProductCard } from "~/pages/product/ui/new-product-card";
-import { TeamCard } from "~/pages/team/team-card";
+import { DiscussionCard } from "~/features/community/ui/discussion-card";
+import { IdeaCard } from "~/features/ideas/ui/idea-card";
+import { JobCard } from "~/features/jobs/ui/job-card";
+import { NewProductCard } from "~/features/products/ui/new-product-card";
+import { TeamCard } from "~/features/teams/ui/team-card";
 import type { Route } from "./+types/home";
 
 export function meta({}: Route.MetaArgs) {
