@@ -14,12 +14,7 @@ export function H2({ className, ...props }: ComponentPropsWithoutRef<"h2">) {
 }
 
 export function P({ className, ...props }: ComponentPropsWithoutRef<"p">) {
-  return (
-    <p
-      className={cn(["leading-7 [&:not(:first-child)]:mt-6", className])}
-      {...props}
-    />
-  );
+  return <p className={cn(["leading-7", className])} {...props} />;
 }
 
 export function TypographyMuted({

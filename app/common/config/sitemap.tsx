@@ -35,7 +35,8 @@ export const LINK = {
   COMMUNITY_CREATE_POST: "/community/create",
 
   // IdeasGPT
-  IDEASGPT: "/ideas",
+  IDEAS: "/ideas",
+  IDEA: (id: string) => `/ideas/${id}`,
 
   // Teams
   TEAMS: "/teams",
@@ -152,7 +153,7 @@ export const linkMenus = [
   },
   {
     name: "IdeasGPT",
-    to: LINK.IDEASGPT,
+    to: LINK.IDEAS,
   },
   {
     name: "Teams",

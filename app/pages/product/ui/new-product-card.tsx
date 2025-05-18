@@ -46,7 +46,13 @@ export function NewProductCard({
           </div>
         </CardHeader>
         <CardFooter className="p-0">
-          <Button variant="outline" className="flex h-12 flex-col gap-1">
+          <Button
+            variant="outline"
+            className="flex h-12 flex-col gap-1"
+            onClick={(e) => {
+              e.preventDefault();
+            }}
+          >
             <ChevronUpIcon size={4} />
             <TypographySmall>{votes}</TypographySmall>
           </Button>

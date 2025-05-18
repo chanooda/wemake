@@ -47,10 +47,8 @@ export function DiscussionCard({
           </div>
         </CardHeader>
         <CardFooter className="justify-end">
-          <Button variant="link">
-            <Link to={LINK.COMMUNITY(id)} className="text-lg">
-              reply &rarr;
-            </Link>
+          <Button className="cursor-pointer" variant="link">
+            reply &rarr;
           </Button>
         </CardFooter>
       </Card>

@@ -3,6 +3,7 @@ import { Button } from "~/common/components/ui/button";
 import { H2, P } from "~/common/components/ui/typography";
 import { LINK, metadata } from "~/common/config";
 import { DiscussionCard } from "~/pages/community/ui/discussion-card";
+import { IdeaCard } from "~/pages/idea/ui/idea-card";
 import { NewProductCard } from "~/pages/product/ui/new-product-card";
 import type { Route } from "./+types/home";
 
@@ -25,6 +26,7 @@ export default function Home() {
         </div>
         {Array.from({ length: 10 }, (_, i) => (
           <NewProductCard
+            key={i}
             id={String(i)}
             title="Product"
             description="This is a description of the product. It provides information about"
@@ -53,6 +55,28 @@ export default function Home() {
             author="chan on"
             category="productivity"
             postedAt="12 hours ago"
+          />
+        ))}
+      </div>
+      <div className="grid grid-cols-3 gap-4 px-20">
+        <div className="flex flex-col">
+          <H2>IdeasGPT</H2>
+          <P>Find ideas for your next project</P>
+          <Button variant="link" className="w-max p-0">
+            <Link to={LINK.COMMUNITIES} className="text-lg">
+              Explore all ideas &rarr;
+            </Link>
+          </Button>
+        </div>
+        {Array.from({ length: 10 }, (_, i) => (
+          <IdeaCard
+            claimed={i % 2 === 0}
+            key={i}
+            id={String(i)}
+            title={`Idea Title ${i + 1}`}
+            viewsCount={100 + i}
+            postedAt="12 hours ago"
+            likesCount={10 + i}
           />
         ))}
       </div>
