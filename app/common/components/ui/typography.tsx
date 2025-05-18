@@ -34,9 +34,15 @@ export function TypographySmall({
   ...props
 }: ComponentPropsWithoutRef<"small">) {
   return (
-    <small
-      className={cn(["text-sm leading-none font-medium", className])}
-      {...props}
-    />
+    <small className={cn(["text-sm font-medium", className])} {...props} />
+  );
+}
+
+export function TypographyLarge({
+  className,
+  ...props
+}: ComponentPropsWithoutRef<"div">) {
+  return (
+    <div className={cn(["text-lg font-semibold", className])} {...props} />
   );
 }

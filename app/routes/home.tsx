@@ -1,9 +1,10 @@
 import { Link } from "react-router";
 import { Button } from "~/common/components/ui/button";
-import { H2, P } from "~/common/components/ui/typography";
+import { H2, TypographyLarge } from "~/common/components/ui/typography";
 import { LINK, metadata } from "~/common/config";
 import { DiscussionCard } from "~/pages/community/ui/discussion-card";
 import { IdeaCard } from "~/pages/idea/ui/idea-card";
+import { JobCard } from "~/pages/job/ui/job-card";
 import { NewProductCard } from "~/pages/product/ui/new-product-card";
 import type { Route } from "./+types/home";
 
@@ -17,7 +18,9 @@ export default function Home() {
       <div className="grid grid-cols-3 gap-4 px-20">
         <div className="flex flex-col">
           <H2>Today's Products</H2>
-          <P>The best products made by our community today.</P>
+          <TypographyLarge>
+            The best products made by our community today.
+          </TypographyLarge>
           <Button variant="link" className="w-max p-0">
             <Link to={LINK.PRODUCT_LEADERBOARDS} className="text-lg">
               Explore all products &rarr;
@@ -39,7 +42,9 @@ export default function Home() {
       <div className="grid grid-cols-3 gap-4 px-20">
         <div className="flex flex-col">
           <H2>Latest Discussion</H2>
-          <P>The Latest Discussion from our community.</P>
+          <TypographyLarge>
+            The Latest Discussion from our community.
+          </TypographyLarge>
           <Button variant="link" className="w-max p-0">
             <Link to={LINK.COMMUNITIES} className="text-lg">
               Explore all discussions &rarr;
@@ -61,7 +66,7 @@ export default function Home() {
       <div className="grid grid-cols-3 gap-4 px-20">
         <div className="flex flex-col">
           <H2>IdeasGPT</H2>
-          <P>Find ideas for your next project</P>
+          <TypographyLarge>Find ideas for your next project</TypographyLarge>
           <Button variant="link" className="w-max p-0">
             <Link to={LINK.COMMUNITIES} className="text-lg">
               Explore all ideas &rarr;
@@ -77,6 +82,31 @@ export default function Home() {
             viewsCount={100 + i}
             postedAt="12 hours ago"
             likesCount={10 + i}
+          />
+        ))}
+      </div>
+      <div className="grid grid-cols-3 gap-4 px-20">
+        <div className="flex flex-col">
+          <H2>Latest Jobs</H2>
+          <TypographyLarge>Find your dream job.</TypographyLarge>
+          <Button variant="link" className="w-max p-0">
+            <Link to={LINK.COMMUNITIES} className="text-lg">
+              Explore all jobs &rarr;
+            </Link>
+          </Button>
+        </div>
+        {Array.from({ length: 10 }, (_, i) => (
+          <JobCard
+            key={i}
+            id={String(i)}
+            company="Meta"
+            companyLogoUrl="https://github.com/facebook.png"
+            companyHq="San Francisco, CA"
+            title="Software Engineer"
+            postedAt="12 hours ago"
+            type="Full-time"
+            positionLocation="Remote"
+            salaryRange="$100,000 ~ $120,000"
           />
         ))}
       </div>
