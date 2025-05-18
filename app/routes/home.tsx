@@ -6,6 +6,7 @@ import { DiscussionCard } from "~/pages/community/ui/discussion-card";
 import { IdeaCard } from "~/pages/idea/ui/idea-card";
 import { JobCard } from "~/pages/job/ui/job-card";
 import { NewProductCard } from "~/pages/product/ui/new-product-card";
+import { TeamCard } from "~/pages/team/team-card";
 import type { Route } from "./+types/home";
 
 export function meta({}: Route.MetaArgs) {
@@ -107,6 +108,33 @@ export default function Home() {
             type="Full-time"
             positionLocation="Remote"
             salaryRange="$100,000 ~ $120,000"
+          />
+        ))}
+      </div>
+      <div className="grid grid-cols-3 gap-4 px-20">
+        <div className="flex flex-col">
+          <H2>Find a team mate</H2>
+          <TypographyLarge>
+            Join a team looking for a new member
+          </TypographyLarge>
+          <Button variant="link" className="w-max p-0">
+            <Link to={LINK.COMMUNITIES} className="text-lg">
+              Explore all teams &rarr;
+            </Link>
+          </Button>
+        </div>
+        {Array.from({ length: 10 }, (_, i) => (
+          <TeamCard
+            key={i}
+            id={String(i)}
+            leaderName="chanoo"
+            leaderAvatarUrl="https://github.com/chanooda.png"
+            positions={[
+              "React Developer",
+              "Backed Developer",
+              "Product Manager",
+            ]}
+            projectDescription="build a new social media platform."
           />
         ))}
       </div>

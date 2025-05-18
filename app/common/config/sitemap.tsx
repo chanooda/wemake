@@ -20,6 +20,7 @@ export const LINK = {
   PRODUCT_PROMOTE: "/products/promote",
 
   // Jobs
+  JOB: (id: string) => `/jobs/${id}`,
   JOBS: "/jobs",
   JOBS_REMOTE: "/jobs?location=remote",
   JOBS_FULL_TIME: "/jobs?type=full-time",
@@ -39,6 +40,7 @@ export const LINK = {
   IDEA: (id: string) => `/ideas/${id}`,
 
   // Teams
+  TEAM: (id: string) => `/teams/${id}`,
   TEAMS: "/teams",
   TEAMS_CREATE: "/teams/create",
 
