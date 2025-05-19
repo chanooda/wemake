@@ -18,6 +18,9 @@ export const LINK = {
   PRODUCT_SEARCH: "/products/search",
   PRODUCT_SUBMIT: "/products/submit",
   PRODUCT_PROMOTE: "/products/promote",
+  PRODUCT_LEADERBOARDS_REDIRECT: (
+    period: "weekly" | "daily" | "monthly" | "yearly",
+  ) => `/products/leaderboards/${period}`,
 
   // Jobs
   JOB: (id: string) => `/jobs/${id}`,
@@ -195,6 +198,10 @@ const getMetadataTitle = (title: string) => {
 export const metadata: Record<string, MetaDescriptors> = {
   [LINK.HOME]: [
     { title: getMetadataTitle("Home") },
-    { name: "Home", content: "Welcome to Wemake" },
+    { name: "description", content: "Welcome to Wemake" },
+  ],
+  [LINK.PRODUCT_LEADERBOARDS]: [
+    { title: getMetadataTitle("Leaderboard") },
+    { name: "description", content: "Top Products leaderboards" },
   ],
 };

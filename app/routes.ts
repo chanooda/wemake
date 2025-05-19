@@ -12,6 +12,10 @@ export default [
     ...prefix("leaderboards", [
       index("features/products/pages/leaderboards-page.tsx"),
       route(
+        "/:period",
+        "features/products/pages/leaderboards-redirection-page.tsx",
+      ),
+      route(
         "/yearly/:year",
         "features/products/pages/yearly-leaderboards-page.tsx",
       ),

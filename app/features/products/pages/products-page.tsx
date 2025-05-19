@@ -1,18 +1,6 @@
-import { Card, CardHeader, CardTitle } from "~/common/components/ui/card";
-import { H2, TypographyLarge } from "~/common/components/ui/typography";
+import { redirect } from "react-router";
+import { LINK } from "~/common/config";
 
-export default function ProductsPage() {
-  return (
-    <div className="flex flex-col gap-8 px-20 py-10">
-      <H2>Product Page</H2>
-      <TypographyLarge>
-        Welcome to the Product Page. Here you can explore all products.
-      </TypographyLarge>
-      <Card>
-        <CardHeader>
-          <CardTitle>Example Product</CardTitle>
-        </CardHeader>
-      </Card>
-    </div>
-  );
+export function loader() {
+  return redirect(LINK.PRODUCT_LEADERBOARDS);
 }
