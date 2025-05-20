@@ -2,6 +2,7 @@ import { DateTime } from "luxon";
 import { data, isRouteErrorResponse, Link } from "react-router";
 import { z } from "zod";
 import { PageTitle } from "~/common/components/page-title";
+import { Pagination } from "~/common/components/pagination";
 import { Button } from "~/common/components/ui/button";
 import { LINK } from "~/common/config";
 import { NewProductCard } from "../ui/new-product-card";
@@ -25,7 +26,7 @@ export function loader({ params }: Route.LoaderArgs) {
     );
   }
 
-  const date = DateTime.fromObject(parsedData).setZone("Asia/Seoul");
+  const date = DateTime.fromObject(parsedData);
   if (!date.isValid) {
     throw data(
       {
@@ -36,7 +37,7 @@ export function loader({ params }: Route.LoaderArgs) {
     );
   }
 
-  const today = DateTime.now().setZone("Asia/Seoul").startOf("day");
+  const today = DateTime.now().startOf("day");
   if (date > today) {
     throw data(
       {
@@ -95,6 +96,7 @@ export default function DailyLeaderboardsPage({
             votes={120}
           />
         ))}
+        <Pagination totalPage={10} />
       </div>
     </div>
   );
