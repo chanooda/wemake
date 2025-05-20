@@ -20,7 +20,7 @@ export default [
         "features/products/pages/yearly-leaderboards-page.tsx",
       ),
       route(
-        "/monthly/:yearly/:month",
+        "/monthly/:year/:month",
         "features/products/pages/monthly-leaderboards-page.tsx",
       ),
       route(
