@@ -4,12 +4,12 @@ import { PageTitle } from "~/common/components/page-title";
 import { Pagination } from "~/common/components/pagination";
 import { Button } from "~/common/components/ui/button";
 import { getMetadataTitle, LINK } from "~/common/config";
-import { dailyParamSchema } from "../config/leaderboards-schema";
+import { dailySchema } from "~/common/model/schema";
 import { NewProductCard } from "../ui/new-product-card";
 import type { Route } from "./+types/daily-leaderboards-page";
 
 export function loader({ params }: Route.LoaderArgs) {
-  const { success, data: parsedData } = dailyParamSchema.safeParse(params);
+  const { success, data: parsedData } = dailySchema.safeParse(params);
   if (!success) {
     throw data(
       {
@@ -46,7 +46,7 @@ export function loader({ params }: Route.LoaderArgs) {
 }
 
 export const meta: Route.MetaFunction = ({ params }) => {
-  const { success, data } = dailyParamSchema.safeParse(params);
+  const { success, data } = dailySchema.safeParse(params);
   let title = "The best products of today";
   if (success) {
     const date = DateTime.fromObject(data);

@@ -203,4 +203,8 @@ export const metadata = {
     { title: getMetadataTitle("Leaderboard") },
     { name: "description", content: "Top Products leaderboards" },
   ],
+  [LINK.PRODUCT_SEARCH]: [
+    { title: getMetadataTitle("Search Products") },
+    { name: "description", content: "Search for products" },
+  ],
 };

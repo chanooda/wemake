@@ -4,12 +4,12 @@ import { PageTitle } from "~/common/components/page-title";
 import { Pagination } from "~/common/components/pagination";
 import { Button } from "~/common/components/ui/button";
 import { getMetadataTitle, LINK } from "~/common/config";
-import { monthlyParamSchema } from "../config/leaderboards-schema";
+import { monthlySchema } from "~/common/model/schema";
 import { NewProductCard } from "../ui/new-product-card";
 import type { Route } from "./+types/monthly-leaderboards-page";
 
 export const meta: Route.MetaFunction = ({ params }) => {
-  const { success, data } = monthlyParamSchema.safeParse(params);
+  const { success, data } = monthlySchema.safeParse(params);
   let title = "The best products of this month";
   if (success) {
     const date = DateTime.fromObject(data);
@@ -23,7 +23,7 @@ export const meta: Route.MetaFunction = ({ params }) => {
 };
 
 export function loader({ params }: Route.LoaderArgs) {
-  const { success, data: parsedData } = monthlyParamSchema.safeParse(params);
+  const { success, data: parsedData } = monthlySchema.safeParse(params);
   if (!success) {
     throw data(
       {
