@@ -1,20 +1,29 @@
 import { DateTime } from "luxon";
 import { data, isRouteErrorResponse, Link } from "react-router";
-import { z } from "zod";
 import { PageTitle } from "~/common/components/page-title";
 import { Pagination } from "~/common/components/pagination";
 import { Button } from "~/common/components/ui/button";
-import { LINK } from "~/common/config";
+import { getMetadataTitle, LINK } from "~/common/config";
+import { monthlyParamSchema } from "../config/leaderboards-schema";
 import { NewProductCard } from "../ui/new-product-card";
 import type { Route } from "./+types/monthly-leaderboards-page";
 
-const paramSchema = z.object({
-  year: z.coerce.number(),
-  month: z.coerce.number(),
-});
+export const meta: Route.MetaFunction = ({ params }) => {
+  const { success, data } = monthlyParamSchema.safeParse(params);
+  let title = "The best products of this month";
+  if (success) {
+    const date = DateTime.fromObject(data);
+    title = `The best products of ${date.toFormat("yyyy.MM")}}`;
+  }
+  return [
+    {
+      title: getMetadataTitle(title),
+    },
+  ];
+};
 
 export function loader({ params }: Route.LoaderArgs) {
-  const { success, data: parsedData } = paramSchema.safeParse(params);
+  const { success, data: parsedData } = monthlyParamSchema.safeParse(params);
   if (!success) {
     throw data(
       {
@@ -53,7 +62,6 @@ export function loader({ params }: Route.LoaderArgs) {
 export default function DailyLeaderboardsPage({
   loaderData,
 }: Route.ComponentProps) {
-  console.log(loaderData);
   const date = DateTime.fromObject(loaderData);
   const prevMonth = date.minus({ month: 1 });
   const nextMonth = date.plus({ month: 1 });
@@ -67,24 +75,15 @@ export default function DailyLeaderboardsPage({
 
   return (
     <div>
-      <PageTitle
-        title={`The best products of\n${date.toLocaleString({
-          year: "numeric",
-          month: "short",
-        })}`}
-      />
+      <PageTitle title={`The best products of\n${date.toFormat("yyyy.MM")}`} />
       <div className="mx-auto flex w-full max-w-screen-md flex-col gap-4">
         <div className="flex w-full items-center justify-center gap-4">
           <Button variant="ghost" asChild>
-            <Link to={prevUrl}>
-              &larr; {prevMonth.toLocaleString(DateTime.DATE_SHORT)}
-            </Link>
+            <Link to={prevUrl}>&larr; {prevMonth.toFormat("yyyy.MM")}</Link>
           </Button>
           {!isToday && (
             <Button variant="ghost" asChild>
-              <Link to={nextUrl}>
-                {nextMonth.toLocaleString(DateTime.DATE_SHORT)} &rarr;
-              </Link>
+              <Link to={nextUrl}>{nextMonth.toFormat("yyyy.MM")} &rarr;</Link>
             </Button>
           )}
         </div>

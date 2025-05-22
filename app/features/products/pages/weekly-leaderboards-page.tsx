@@ -1,20 +1,33 @@
 import { DateTime } from "luxon";
 import { data, isRouteErrorResponse, Link } from "react-router";
-import { z } from "zod";
 import { PageTitle } from "~/common/components/page-title";
 import { Pagination } from "~/common/components/pagination";
 import { Button } from "~/common/components/ui/button";
-import { LINK } from "~/common/config";
+import { getMetadataTitle, LINK } from "~/common/config";
+import { weeklyParamSchema } from "../config/leaderboards-schema";
 import { NewProductCard } from "../ui/new-product-card";
 import type { Route } from "./+types/weekly-leaderboards-page";
 
-const paramSchema = z.object({
-  year: z.coerce.number(),
-  week: z.coerce.number(),
-});
+export const meta: Route.MetaFunction = ({ params }) => {
+  const { success, data } = weeklyParamSchema.safeParse(params);
+  let title = "The best products of this week";
+  if (success) {
+    const date = DateTime.fromObject(data);
+    title = `The best products of ${date
+      .startOf("week")
+      .toLocaleString(DateTime.DATE_SHORT)} - ${date
+      .endOf("week")
+      .toLocaleString(DateTime.DATE_SHORT)}`;
+  }
+  return [
+    {
+      title: getMetadataTitle(title),
+    },
+  ];
+};
 
 export function loader({ params }: Route.LoaderArgs) {
-  const { success, data: parsedData } = paramSchema.safeParse(params);
+  const { success, data: parsedData } = weeklyParamSchema.safeParse(params);
   if (!success) {
     throw data(
       {

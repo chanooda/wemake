@@ -4,7 +4,6 @@ import {
   SettingsIcon,
   UserIcon,
 } from "lucide-react";
-import type { MetaDescriptors } from "react-router/route-module";
 
 export const LINK = {
   // Home
@@ -191,11 +190,11 @@ export const dropdownMenus = (id: string) => [
   },
 ];
 
-const getMetadataTitle = (title: string) => {
+export const getMetadataTitle = (title: string) => {
   return `${title} | Wemake`;
 };
 
-export const metadata: Record<string, MetaDescriptors> = {
+export const metadata = {
   [LINK.HOME]: [
     { title: getMetadataTitle("Home") },
     { name: "description", content: "Welcome to Wemake" },

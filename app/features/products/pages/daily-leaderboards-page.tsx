@@ -1,21 +1,15 @@
 import { DateTime } from "luxon";
 import { data, isRouteErrorResponse, Link } from "react-router";
-import { z } from "zod";
 import { PageTitle } from "~/common/components/page-title";
 import { Pagination } from "~/common/components/pagination";
 import { Button } from "~/common/components/ui/button";
-import { LINK } from "~/common/config";
+import { getMetadataTitle, LINK } from "~/common/config";
+import { dailyParamSchema } from "../config/leaderboards-schema";
 import { NewProductCard } from "../ui/new-product-card";
 import type { Route } from "./+types/daily-leaderboards-page";
 
-const paramSchema = z.object({
-  year: z.coerce.number(),
-  month: z.coerce.number(),
-  day: z.coerce.number(),
-});
-
 export function loader({ params }: Route.LoaderArgs) {
-  const { success, data: parsedData } = paramSchema.safeParse(params);
+  const { success, data: parsedData } = dailyParamSchema.safeParse(params);
   if (!success) {
     throw data(
       {
@@ -51,6 +45,20 @@ export function loader({ params }: Route.LoaderArgs) {
   return { ...parsedData };
 }
 
+export const meta: Route.MetaFunction = ({ params }) => {
+  const { success, data } = dailyParamSchema.safeParse(params);
+  let title = "The best products of today";
+  if (success) {
+    const date = DateTime.fromObject(data);
+    title = `The best products of ${date.toLocaleString(DateTime.DATE_SHORT)}`;
+  }
+  return [
+    {
+      title: getMetadataTitle(title),
+    },
+  ];
+};
+
 export default function DailyLeaderboardsPage({
   loaderData,
 }: Route.ComponentProps) {
@@ -68,7 +76,7 @@ export default function DailyLeaderboardsPage({
   return (
     <div>
       <PageTitle
-        title={`The best products of ${date.toLocaleString(DateTime.DATE_MED)}`}
+        title={`The best products of ${date.toLocaleString(DateTime.DATE_SHORT)}`}
       />
       <div className="mx-auto flex w-full max-w-screen-md flex-col gap-4">
         <div className="flex w-full items-center justify-center gap-4">
