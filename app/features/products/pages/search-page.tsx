@@ -26,7 +26,6 @@ export const loader = ({ request }: Route.LoaderArgs) => {
 };
 
 export default function SearchPage({ loaderData }: Route.ComponentProps) {
-  console.log(loaderData);
   return (
     <div>
       <PageTitle

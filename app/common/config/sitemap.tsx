@@ -14,6 +14,7 @@ export const LINK = {
   PRODUCTS: "/products",
   PRODUCT_LEADERBOARDS: "/products/leaderboards",
   PRODUCT_CATEGORIES: "/products/categories",
+  PRODUCT_CATEGORY: (id: string) => `/products/categories/${id}`,
   PRODUCT_SEARCH: "/products/search",
   PRODUCT_SUBMIT: "/products/submit",
   PRODUCT_PROMOTE: "/products/promote",
@@ -201,10 +202,14 @@ export const metadata = {
   ],
   [LINK.PRODUCT_LEADERBOARDS]: [
     { title: getMetadataTitle("Leaderboard") },
-    { name: "description", content: "Top Products leaderboards" },
+    { name: "description", content: "Top products leaderboards" },
   ],
   [LINK.PRODUCT_SEARCH]: [
     { title: getMetadataTitle("Search Products") },
     { name: "description", content: "Search for products" },
+  ],
+  [LINK.PRODUCT_CATEGORIES]: [
+    { title: getMetadataTitle("Products Categories") },
+    { name: "description", content: "Browse products by category" },
   ],
 };
