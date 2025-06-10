@@ -212,4 +212,8 @@ export const metadata = {
     { title: getMetadataTitle("Products Categories") },
     { name: "description", content: "Browse products by category" },
   ],
+  [LINK.PRODUCT_SUBMIT]: [
+    { title: getMetadataTitle("Submit a Product") },
+    { name: "description", content: "Submit your product" },
+  ],
 };
