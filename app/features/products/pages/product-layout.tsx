@@ -1,6 +1,7 @@
 import { Separator } from "@radix-ui/react-dropdown-menu";
-import { ChevronUpIcon, StarIcon } from "lucide-react";
+import { ChevronUpIcon } from "lucide-react";
 import { NavLink, Outlet } from "react-router";
+import { Rating } from "~/common/components/rating";
 import { Button, buttonVariants } from "~/common/components/ui/button";
 import { P, TypographyMuted } from "~/common/components/ui/typography";
 import { LINK } from "~/common/config";
@@ -18,17 +19,7 @@ const ProductLayout = ({}: Route.ComponentProps) => {
             <P className="text-xl">Product Description</P>
           </div>
           <div className="flex items-center gap-2">
-            <div className="gap-01 flex">
-              {new Array(5).fill(0).map((_, index) => {
-                return (
-                  <StarIcon
-                    key={index}
-                    size={20}
-                    className="fill-yellow-400 text-yellow-400"
-                  />
-                );
-              })}
-            </div>
+            <Rating />
             <TypographyMuted>100 Reviews</TypographyMuted>
           </div>
         </div>
@@ -47,7 +38,7 @@ const ProductLayout = ({}: Route.ComponentProps) => {
           <NavLink
             className={({ isActive }) =>
               cn(
-                buttonVariants({ variant: "ghost" }),
+                buttonVariants({ variant: "ghost", size: "lg" }),
                 isActive && "text-primary font-bold",
               )
             }
@@ -59,7 +50,7 @@ const ProductLayout = ({}: Route.ComponentProps) => {
           <NavLink
             className={({ isActive }) =>
               cn(
-                buttonVariants({ variant: "ghost" }),
+                buttonVariants({ variant: "ghost", size: "lg" }),
                 isActive && "text-primary font-bold",
               )
             }
