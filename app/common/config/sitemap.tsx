@@ -21,6 +21,8 @@ export const LINK = {
   PRODUCT_LEADERBOARDS_REDIRECT: (
     period: "weekly" | "daily" | "monthly" | "yearly",
   ) => `/products/leaderboards/${period}`,
+  PRODUCT_OVERVIEW: (id: string) => `/products/${id}/overview`,
+  PRODUCT_REVIEWS: (id: string) => `/products/${id}/reviews`,
 
   // Jobs
   JOB: (id: string) => `/jobs/${id}`,
