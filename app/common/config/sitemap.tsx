@@ -218,4 +218,8 @@ export const metadata = {
     { title: getMetadataTitle("Submit a Product") },
     { name: "description", content: "Submit your product" },
   ],
+  [LINK.IDEAS]: [
+    { title: getMetadataTitle("IdeasGPT") },
+    { name: "description", content: "Find ideas for your next project" },
+  ],
 };
