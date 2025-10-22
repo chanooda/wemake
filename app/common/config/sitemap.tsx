@@ -222,4 +222,8 @@ export const metadata = {
     { title: getMetadataTitle("IdeasGPT") },
     { name: "description", content: "Find ideas for your next project" },
   ],
+  [LINK.JOBS]: [
+    { title: getMetadataTitle("Jobs") },
+    { name: "description", content: "Find jobs in our community" },
+  ],
 };
