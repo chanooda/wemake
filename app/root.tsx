@@ -5,12 +5,14 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLocation,
 } from "react-router";
 
 import type { Route } from "./+types/root";
 import "./app.css";
 import { Navigation } from "./common/components/navigation";
 import { initialize } from "./common/lib/initialize";
+import { cn } from "./common/lib/utils";
 
 export const links: Route.LinksFunction = () => [
   {
@@ -29,7 +31,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        <main className="px-20">{children}</main>
+        <main>{children}</main>
         <ScrollRestoration />
         <Scripts />
       </body>
@@ -39,10 +41,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   initialize();
+  const { pathname } = useLocation();
+
+  const isAuthPage = pathname.startsWith("/auth");
 
   return (
-    <div className="py-28">
-      <Navigation isLoggedIn={true} />
+    <div className={cn("px-20 py-28", isAuthPage && "px-0 py-0")}>
+      {isAuthPage ? null : <Navigation isLoggedIn={true} />}
       <Outlet />
     </div>
   );

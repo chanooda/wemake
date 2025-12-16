@@ -230,4 +230,12 @@ export const metadata = {
     { title: getMetadataTitle("Submit Job") },
     { name: "description", content: "Submit a job to our community" },
   ],
+  [LINK.AUTH_LOGIN]: [
+    { title: getMetadataTitle("Login") },
+    { name: "description", content: "Login to your account" },
+  ],
+  [LINK.AUTH_JOIN]: [
+    { title: getMetadataTitle("Join") },
+    { name: "description", content: "Create an account" },
+  ],
 };
