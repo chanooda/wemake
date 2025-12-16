@@ -1,9 +1,9 @@
 import {
-  type RouteConfig,
   index,
   layout,
   prefix,
   route,
+  type RouteConfig,
 } from "@react-router/dev/routes";
 
 export default [
@@ -52,5 +52,8 @@ export default [
     index("features/ideas/pages/ideas-page.tsx"),
     route("/:ideaId", "features/ideas/pages/idea-page.tsx"),
   ]),
-  ...prefix("jobs", [index("features/jobs/pages/jobs-page.tsx")]),
+  ...prefix("jobs", [
+    index("features/jobs/pages/jobs-page.tsx"),
+    route("/:jobId", "features/jobs/pages/job-page.tsx"),
+  ]),
 ] satisfies RouteConfig;
