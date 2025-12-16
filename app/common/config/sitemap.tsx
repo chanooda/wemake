@@ -226,4 +226,8 @@ export const metadata = {
     { title: getMetadataTitle("Jobs") },
     { name: "description", content: "Find jobs in our community" },
   ],
+  [LINK.JOBS_SUBMIT]: [
+    { title: getMetadataTitle("Submit Job") },
+    { name: "description", content: "Submit a job to our community" },
+  ],
 };
