@@ -65,6 +65,11 @@ export const LINK = {
   AUTH_LOGOUT: "/auth/logout",
   AUTH_LOGIN: "/auth/login",
   AUTH_JOIN: "/auth/join",
+  AUTH_OTP_START: "/auth/otp/start",
+  AUTH_OTP_COMPLETE: "/auth/otp/complete",
+  AUTH_SOCIAL_START: (provider: string) => `/auth/social/${provider}/start`,
+  AUTH_SOCIAL_COMPLETE: (provider: string) =>
+    `/auth/social/${provider}/complete`,
 };
 
 export const linkMenus = [
@@ -237,5 +242,13 @@ export const metadata = {
   [LINK.AUTH_JOIN]: [
     { title: getMetadataTitle("Join") },
     { name: "description", content: "Create an account" },
+  ],
+  [LINK.AUTH_OTP_START]: [
+    { title: getMetadataTitle("OTP Start") },
+    { name: "description", content: "Start the OTP process" },
+  ],
+  [LINK.AUTH_OTP_COMPLETE]: [
+    { title: getMetadataTitle("OTP Complete") },
+    { name: "description", content: "Complete the OTP process" },
   ],
 };
