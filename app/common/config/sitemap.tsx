@@ -36,9 +36,10 @@ export const LINK = {
   // Community
   COMMUNITIES: "/community",
   COMMUNITY: (id: string) => `/community/${id}`,
+  COMMUNITY_CREATE_POST: "/community/create",
   COMMUNITY_TOP_POSTS: "/community?sort=top",
   COMMUNITY_NEW_POSTS: "/community?sort=new",
-  COMMUNITY_CREATE_POST: "/community/create",
+  COMMUNITY_TOPIC: (topic: string) => `/community?topic=${topic}`,
 
   // IdeasGPT
   IDEAS: "/ideas",
@@ -250,5 +251,13 @@ export const metadata = {
   [LINK.AUTH_OTP_COMPLETE]: [
     { title: getMetadataTitle("OTP Complete") },
     { name: "description", content: "Complete the OTP process" },
+  ],
+  [LINK.COMMUNITIES]: [
+    { title: getMetadataTitle("Community") },
+    { name: "description", content: "Communities" },
+  ],
+  [LINK.COMMUNITY_CREATE_POST]: [
+    { title: getMetadataTitle("Create a Post") },
+    { name: "description", content: "Create a post in our community" },
   ],
 };

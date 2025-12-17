@@ -1,4 +1,5 @@
 import { Avatar, AvatarFallback } from "@radix-ui/react-avatar";
+import { ChevronUpIcon } from "lucide-react";
 import { Link } from "react-router";
 import { AvatarImage } from "~/common/components/ui/avatar";
 import { Button } from "~/common/components/ui/button";
@@ -10,6 +11,7 @@ import {
 } from "~/common/components/ui/card";
 import { TypographySmall } from "~/common/components/ui/typography";
 import { LINK } from "~/common/config";
+import { cn } from "~/common/lib/utils";
 
 interface DiscussionCardProps {
   id: string;
@@ -18,6 +20,8 @@ interface DiscussionCardProps {
   authorAvatarUrl: string;
   category: string;
   postedAt: string;
+  expanded?: boolean;
+  votes?: number;
 }
 
 export function DiscussionCard({
@@ -27,11 +31,17 @@ export function DiscussionCard({
   category,
   postedAt,
   id,
+  expanded = false,
+  votes = 0,
 }: DiscussionCardProps) {
   return (
     <Link to={LINK.COMMUNITY(id)}>
-      <Card>
-        <CardHeader className="flex items-center gap-4">
+      <Card
+        className={cn([
+          expanded ? "flex flex-row items-center justify-start" : "",
+        ])}
+      >
+        <CardHeader className="flex w-full items-center gap-4">
           <Avatar className="size-10 shrink-0">
             <AvatarFallback>{author}</AvatarFallback>
             <AvatarImage src={authorAvatarUrl} alt={`${author} avatar`} />
@@ -46,11 +56,27 @@ export function DiscussionCard({
             </div>
           </div>
         </CardHeader>
-        <CardFooter className="justify-end">
-          <Button className="cursor-pointer" variant="link">
-            reply &rarr;
-          </Button>
-        </CardFooter>
+        {expanded && (
+          <CardFooter className="justify-end pb-0">
+            <Button
+              variant="outline"
+              className="flex h-12 flex-col gap-1"
+              onClick={(e) => {
+                e.preventDefault();
+              }}
+            >
+              <ChevronUpIcon size={4} />
+              <TypographySmall>{votes}</TypographySmall>
+            </Button>
+          </CardFooter>
+        )}
+        {!expanded && (
+          <CardFooter className="justify-end">
+            <Button className="cursor-pointer" variant="link">
+              reply &rarr;
+            </Button>
+          </CardFooter>
+        )}
       </Card>
     </Link>
   );
