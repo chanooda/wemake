@@ -260,4 +260,12 @@ export const metadata = {
     { title: getMetadataTitle("Create a Post") },
     { name: "description", content: "Create a post in our community" },
   ],
+  [LINK.TEAMS]: [
+    { title: getMetadataTitle("Teams") },
+    { name: "description", content: "Find teams in our community" },
+  ],
+  [LINK.TEAMS_CREATE]: [
+    { title: getMetadataTitle("Create a Team") },
+    { name: "description", content: "Create a team in our community" },
+  ],
 };
