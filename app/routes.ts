@@ -8,6 +8,7 @@ import {
 
 export default [
   index("routes/home.tsx"),
+
   ...prefix("products", [
     index("features/products/pages/products-page.tsx"),
     ...prefix("leaderboards", [
@@ -48,15 +49,18 @@ export default [
       ]),
     ]),
   ]),
+
   ...prefix("ideas", [
     index("features/ideas/pages/ideas-page.tsx"),
     route("/:ideaId", "features/ideas/pages/idea-page.tsx"),
   ]),
+
   ...prefix("jobs", [
     index("features/jobs/pages/jobs-page.tsx"),
     route("/submit", "features/jobs/pages/job-submit-page.tsx"),
     route("/:jobId", "features/jobs/pages/job-page.tsx"),
   ]),
+
   ...prefix("/auth", [
     layout("features/auth/pages/auth-layout.tsx", [
       route("/login", "features/auth/pages/login-page.tsx"),
@@ -71,14 +75,36 @@ export default [
       ]),
     ]),
   ]),
+
   ...prefix("community", [
     index("features/community/pages/community-page.tsx"),
     route("/:postId", "features/community/pages/post-page.tsx"),
     route("/create", "features/community/pages/post-submit-page.tsx"),
   ]),
+
   ...prefix("teams", [
     index("features/teams/pages/teams-page.tsx"),
     route("/create", "features/teams/pages/team-submit-page.tsx"),
     route("/:teamId", "features/teams/pages/team-page.tsx"),
   ]),
+
+  ...prefix("/my", [
+    ...prefix("/dashboard", [
+      index("features/users/pages/dashboard-page.tsx"),
+      route("/ideas", "features/users/pages/dashboard-ideas-page.tsx"),
+      route(
+        "/products/:productId",
+        "features/users/pages/dashboard-product-page.tsx",
+      ),
+    ]),
+    ...prefix("/messages", [
+      index("features/users/pages/messages-page.tsx"),
+      route("/:messageId", "features/users/pages/message-page.tsx"),
+    ]),
+    route("/profile", "features/users/pages/my-profile-page.tsx"),
+    route("/settings", "features/users/pages/settings-page.tsx"),
+    route("/notifications", "features/users/pages/notifications-page.tsx"),
+  ]),
+
+  route("/users/:username", "features/users/pages/profile-page.tsx"),
 ] satisfies RouteConfig;

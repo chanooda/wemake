@@ -53,14 +53,16 @@ export const LINK = {
   // My
   MY: "/my",
   MY_DASHBOARD: "/my/dashboard",
+  MY_DASHBOARD_IDEAS: "/my/dashboard/ideas",
+  MY_DASHBOARD_PRODUCT: (id: string) => `/my/dashboard/products/${id}`,
+  MY_PROFILE: "/my/profile",
   MY_SETTINGS: "/my/settings",
   MY_NOTIFICATIONS: "/my/notifications",
   MY_MESSAGES: "/my/messages",
+  MY_MESSAGE: (id: string) => `/my/messages/${id}`,
 
   //User
   USER: (id: string) => `/users/${id}`,
-  USER_POST: (id: string) => `/users/${id}/posts`,
-  USER_PRODUCTS: (id: string) => `/users/${id}/products`,
 
   // auth
   AUTH_LOGOUT: "/auth/logout",
@@ -190,7 +192,7 @@ export const dropdownMenus = (id: string) => [
   {
     items: [
       { name: "Dashboard", to: LINK.MY_DASHBOARD, icon: <ChartColumnIcon /> },
-      { name: "Profile", to: LINK.USER(id), icon: <UserIcon /> },
+      { name: "Profile", to: LINK.MY_PROFILE, icon: <UserIcon /> },
       { name: "Settings", to: LINK.MY_SETTINGS, icon: <SettingsIcon /> },
     ],
   },
