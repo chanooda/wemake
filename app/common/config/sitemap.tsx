@@ -63,6 +63,8 @@ export const LINK = {
 
   //User
   USER: (id: string) => `/users/${id}`,
+  USER_PRODUCTS: (id: string) => `/users/${id}/products`,
+  USER_POSTS: (id: string) => `/users/${id}/posts`,
 
   // auth
   AUTH_LOGOUT: "/auth/logout",
@@ -210,6 +212,7 @@ export const metadata = {
     { title: getMetadataTitle("Home") },
     { name: "description", content: "Welcome to Wemake" },
   ],
+
   [LINK.PRODUCT_LEADERBOARDS]: [
     { title: getMetadataTitle("Leaderboard") },
     { name: "description", content: "Top products leaderboards" },
@@ -226,10 +229,12 @@ export const metadata = {
     { title: getMetadataTitle("Submit a Product") },
     { name: "description", content: "Submit your product" },
   ],
+
   [LINK.IDEAS]: [
     { title: getMetadataTitle("IdeasGPT") },
     { name: "description", content: "Find ideas for your next project" },
   ],
+
   [LINK.JOBS]: [
     { title: getMetadataTitle("Jobs") },
     { name: "description", content: "Find jobs in our community" },
@@ -238,6 +243,7 @@ export const metadata = {
     { title: getMetadataTitle("Submit Job") },
     { name: "description", content: "Submit a job to our community" },
   ],
+
   [LINK.AUTH_LOGIN]: [
     { title: getMetadataTitle("Login") },
     { name: "description", content: "Login to your account" },
@@ -254,6 +260,7 @@ export const metadata = {
     { title: getMetadataTitle("OTP Complete") },
     { name: "description", content: "Complete the OTP process" },
   ],
+
   [LINK.COMMUNITIES]: [
     { title: getMetadataTitle("Community") },
     { name: "description", content: "Communities" },
@@ -262,6 +269,7 @@ export const metadata = {
     { title: getMetadataTitle("Create a Post") },
     { name: "description", content: "Create a post in our community" },
   ],
+
   [LINK.TEAMS]: [
     { title: getMetadataTitle("Teams") },
     { name: "description", content: "Find teams in our community" },
@@ -269,5 +277,18 @@ export const metadata = {
   [LINK.TEAMS_CREATE]: [
     { title: getMetadataTitle("Create a Team") },
     { name: "description", content: "Create a team in our community" },
+  ],
+
+  [LINK.MY_SETTINGS]: [
+    { title: getMetadataTitle("Settings") },
+    { name: "description", content: "Account settings" },
+  ],
+  [LINK.MY_NOTIFICATIONS]: [
+    { title: getMetadataTitle("Notifications") },
+    { name: "description", content: "Notifications" },
+  ],
+  [LINK.MY_MESSAGES]: [
+    { title: getMetadataTitle("Messages") },
+    { name: "description", content: "Messages" },
   ],
 };

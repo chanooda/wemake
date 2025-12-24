@@ -8,7 +8,7 @@ import { LINK } from "~/common/config";
 import { cn } from "~/common/lib/utils";
 import type { Route } from "./+types/product-layout";
 
-const ProductLayout = ({}: Route.ComponentProps) => {
+const ProductLayout = ({ params: { productId } }: Route.ComponentProps) => {
   return (
     <div>
       <div className="flex gap-4">
@@ -36,25 +36,27 @@ const ProductLayout = ({}: Route.ComponentProps) => {
       <div className="mt-8">
         <div className="flex gap-8">
           <NavLink
+            end
             className={({ isActive }) =>
               cn(
                 buttonVariants({ variant: "ghost", size: "lg" }),
                 isActive && "text-primary font-bold",
               )
             }
-            to={LINK.PRODUCT_OVERVIEW("1")}
+            to={LINK.PRODUCT_OVERVIEW(productId ?? "")}
           >
             Overview
           </NavLink>
 
           <NavLink
+            end
             className={({ isActive }) =>
               cn(
                 buttonVariants({ variant: "ghost", size: "lg" }),
                 isActive && "text-primary font-bold",
               )
             }
-            to={LINK.PRODUCT_REVIEWS("1")}
+            to={LINK.PRODUCT_REVIEWS(productId ?? "")}
           >
             Reviews
           </NavLink>

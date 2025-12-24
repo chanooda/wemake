@@ -3,7 +3,7 @@ import { PageTitle } from "~/common/components/page-title";
 import { Button } from "~/common/components/ui/button";
 import { H2, TypographyLarge } from "~/common/components/ui/typography";
 import { LINK, metadata } from "~/common/config";
-import { NewProductCard } from "../ui/new-product-card";
+import { ProductCard } from "../ui/new-product-card";
 import type { Route } from "./+types/leaderboards-page";
 
 export const meta: Route.MetaFunction = () => {
@@ -26,7 +26,7 @@ export default function LeaderboardsPage() {
             </TypographyLarge>
           </div>
           {Array.from({ length: 7 }, (_, i) => (
-            <NewProductCard
+            <ProductCard
               key={i}
               id={String(i)}
               title="Product"
@@ -55,7 +55,7 @@ export default function LeaderboardsPage() {
             </TypographyLarge>
           </div>
           {Array.from({ length: 7 }, (_, i) => (
-            <NewProductCard
+            <ProductCard
               key={i}
               id={String(i)}
               title="Product"
@@ -84,7 +84,7 @@ export default function LeaderboardsPage() {
             </TypographyLarge>
           </div>
           {Array.from({ length: 7 }, (_, i) => (
-            <NewProductCard
+            <ProductCard
               key={i}
               id={String(i)}
               title="Product"
@@ -113,7 +113,7 @@ export default function LeaderboardsPage() {
             </TypographyLarge>
           </div>
           {Array.from({ length: 7 }, (_, i) => (
-            <NewProductCard
+            <ProductCard
               key={i}
               id={String(i)}
               title="Product"

@@ -5,7 +5,7 @@ import { LINK, metadata } from "~/common/config";
 import { DiscussionCard } from "~/features/community/ui/discussion-card";
 import { IdeaCard } from "~/features/ideas/ui/idea-card";
 import { JobCard } from "~/features/jobs/ui/job-card";
-import { NewProductCard } from "~/features/products/ui/new-product-card";
+import { ProductCard } from "~/features/products/ui/new-product-card";
 import { TeamCard } from "~/features/teams/ui/team-card";
 import type { Route } from "./+types/home";
 
@@ -29,7 +29,7 @@ export default function Home() {
           </Button>
         </div>
         {Array.from({ length: 10 }, (_, i) => (
-          <NewProductCard
+          <ProductCard
             key={i}
             id={String(i)}
             title="Product"

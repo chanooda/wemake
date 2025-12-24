@@ -5,7 +5,7 @@ import { Button } from "~/common/components/ui/button";
 import { Input } from "~/common/components/ui/input";
 import { LINK, metadata } from "~/common/config";
 import { searchSchema } from "~/common/model/schema";
-import { NewProductCard } from "../ui/new-product-card";
+import { ProductCard } from "../ui/new-product-card";
 import type { Route } from "./+types/search-page";
 
 export const meta: Route.MetaFunction = () => {
@@ -40,7 +40,7 @@ export default function SearchPage({ loaderData }: Route.ComponentProps) {
           </div>
         </Form>
         {Array.from({ length: 10 }, (_, i) => (
-          <NewProductCard
+          <ProductCard
             key={i}
             id={String(i)}
             title="Product"

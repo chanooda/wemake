@@ -20,7 +20,7 @@ interface ProductCardProps {
   id: string;
 }
 
-export function NewProductCard({
+export function ProductCard({
   id,
   title,
   description,

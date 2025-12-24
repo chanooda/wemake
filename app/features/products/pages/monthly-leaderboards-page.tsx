@@ -5,7 +5,7 @@ import { Pagination } from "~/common/components/pagination";
 import { Button } from "~/common/components/ui/button";
 import { getMetadataTitle, LINK } from "~/common/config";
 import { monthlySchema } from "~/common/model/schema";
-import { NewProductCard } from "../ui/new-product-card";
+import { ProductCard } from "../ui/new-product-card";
 import type { Route } from "./+types/monthly-leaderboards-page";
 
 export const meta: Route.MetaFunction = ({ params }) => {
@@ -88,7 +88,7 @@ export default function DailyLeaderboardsPage({
           )}
         </div>
         {Array.from({ length: 10 }, (_, i) => (
-          <NewProductCard
+          <ProductCard
             key={i}
             id={String(i)}
             title="Product"

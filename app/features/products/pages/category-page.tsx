@@ -1,6 +1,6 @@
 import { PageTitle } from "~/common/components/page-title";
 import { Pagination } from "~/common/components/pagination";
-import { NewProductCard } from "../ui/new-product-card";
+import { ProductCard } from "../ui/new-product-card";
 import type { Route } from "./+types/category-page";
 
 export const meta: Route.MetaFunction = () => {
@@ -16,7 +16,7 @@ export default function CategoryPage() {
       <PageTitle title="Category Title" subTitle="Category SubTitle" />
       <div className="mx-auto flex w-full max-w-screen-md flex-col gap-4">
         {Array.from({ length: 10 }, (_, i) => (
-          <NewProductCard
+          <ProductCard
             key={i}
             id={String(i)}
             title="Product"
