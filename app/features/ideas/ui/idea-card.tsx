@@ -35,6 +35,7 @@ export const IdeaCard = ({
         <CardHeader>
           <CardTitle
             className={cn([
+              "text-lg",
               claimed ? "bg-foreground selection:bg-foreground" : "",
             ])}
           >
@@ -54,11 +55,13 @@ export const IdeaCard = ({
             variant="outline"
             className="cursor-pointer"
             onClick={(e) => e.preventDefault()}
+            size="sm"
           >
             <HeartIcon /> {likesCount}
           </Button>
           {claimed ? (
             <Button
+              size="sm"
               onClick={(e) => {
                 e.preventDefault();
               }}
@@ -68,7 +71,9 @@ export const IdeaCard = ({
               <LockIcon /> Claimed
             </Button>
           ) : (
-            <Button className="cursor-pointer">Claim idea now &rarr;</Button>
+            <Button className="cursor-pointer" size="sm">
+              Claim idea now &rarr;
+            </Button>
           )}
         </CardFooter>
       </Card>

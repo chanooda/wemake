@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import {
   Avatar,
   AvatarFallback,
@@ -10,6 +10,7 @@ import {
 } from "~/common/components/ui/sidebar";
 import { TypographyMuted } from "~/common/components/ui/typography";
 import { LINK } from "~/common/config";
+import { cn } from "~/common/lib/utils";
 
 interface MessageItemProps {
   userId: string;
@@ -26,10 +27,16 @@ export const MessageItem = ({
   name,
   lastMessage,
 }: MessageItemProps) => {
+  const location = useLocation();
   return (
     <SidebarMenuItem>
       <SidebarMenuButton className="h-16" asChild>
-        <Link to={LINK.MY_MESSAGE(userId)}>
+        <Link
+          to={LINK.MY_MESSAGE(userId)}
+          className={cn(
+            location.pathname === LINK.MY_MESSAGE(userId) && "bg-accent",
+          )}
+        >
           <div className="flex items-center gap-2">
             <Avatar className="size-12">
               <AvatarImage src={avatarSrc} />
@@ -45,4 +52,3 @@ export const MessageItem = ({
     </SidebarMenuItem>
   );
 };
-

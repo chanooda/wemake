@@ -89,14 +89,17 @@ export default [
   ]),
 
   ...prefix("/my", [
-    ...prefix("/dashboard", [
-      index("features/users/pages/dashboard-page.tsx"),
-      route("/ideas", "features/users/pages/dashboard-ideas-page.tsx"),
-      route(
-        "/products/:productId",
-        "features/users/pages/dashboard-product-page.tsx",
-      ),
+    layout("features/users/pages/my-layout.tsx", [
+      ...prefix("/dashboard", [
+        index("features/users/pages/dashboard-page.tsx"),
+        route("/ideas", "features/users/pages/dashboard-ideas-page.tsx"),
+        route(
+          "/products/:productId",
+          "features/users/pages/dashboard-product-page.tsx",
+        ),
+      ]),
     ]),
+
     layout("features/users/pages/messages-layout.tsx", [
       ...prefix("/messages", [
         index("features/users/pages/messages-page.tsx"),
