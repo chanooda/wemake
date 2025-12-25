@@ -14,7 +14,7 @@ import {
 import { LINK } from "~/common/config";
 import { cn } from "~/common/lib/utils";
 
-const MyLayout = () => {
+const MyDashboardLayout = () => {
   const location = useLocation();
 
   return (
@@ -77,9 +77,11 @@ const MyLayout = () => {
           </SidebarGroup>
         </SidebarContent>
       </Sidebar>
-      <Outlet />
+      <div className="w-full">
+        <Outlet />
+      </div>
     </SidebarProvider>
   );
 };
 
-export default MyLayout;
+export default MyDashboardLayout;

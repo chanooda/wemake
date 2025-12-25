@@ -89,7 +89,7 @@ export default [
   ]),
 
   ...prefix("/my", [
-    layout("features/users/pages/my-layout.tsx", [
+    layout("features/users/pages/my-dashboard-layout.tsx", [
       ...prefix("/dashboard", [
         index("features/users/pages/dashboard-page.tsx"),
         route("/ideas", "features/users/pages/dashboard-ideas-page.tsx"),
