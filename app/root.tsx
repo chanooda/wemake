@@ -46,7 +46,9 @@ export default function App() {
   const isAuthPage = pathname.startsWith("/auth");
 
   return (
-    <div className={cn("px-20 py-28", isAuthPage && "px-0 py-0")}>
+    <div
+      className={cn("px-4 py-28 xl:px-20", isAuthPage && "px-0 py-0 xl:px-0")}
+    >
       {isAuthPage ? null : <Navigation isLoggedIn={true} />}
       <Outlet />
     </div>

@@ -1,6 +1,6 @@
 import { BellIcon, MessageCircleIcon } from "lucide-react";
 import { Link } from "react-router";
-import { dropdownMenus, LINK, linkMenus } from "../config";
+import { LINK, dropdownMenus, linkMenus } from "../config";
 import { cn } from "../lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
@@ -36,7 +36,7 @@ export const Navigation = ({
   hasNotifications,
 }: NavigationProps) => {
   return (
-    <nav className="bg-background/50 fixed top-0 left-0 flex h-16 w-full items-center justify-between px-20 backdrop-blur">
+    <nav className="bg-background/50 fixed top-0 left-0 z-50 flex h-16 w-full items-center justify-between px-20 backdrop-blur">
       <div className="flex items-center">
         <Link to="/" className="text-lg font-bold tracking-tighter">
           WEMAKE

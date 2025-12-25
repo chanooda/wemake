@@ -32,8 +32,8 @@ const JobsPage = () => {
   return (
     <div>
       <PageTitle title="Jobs" subTitle="Find jobs in our community" />
-      <div className="grid grid-cols-6 items-start gap-4">
-        <div className="col-span-4 grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 items-start gap-4 xl:grid-cols-6">
+        <div className="xl:cols-span-4 col-span-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {Array.from({ length: 30 }, (_, i) => (
             <JobCard
               key={i}
@@ -49,7 +49,7 @@ const JobsPage = () => {
             />
           ))}
         </div>
-        <div className="sticky top-20 col-span-2">
+        <div className="sticky top-20 col-span-1 xl:col-span-2">
           <div className="flex flex-col gap-4">
             <div className="flex flex-col gap-4">
               <div className="flex flex-col gap-2">

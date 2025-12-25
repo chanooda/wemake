@@ -10,6 +10,7 @@
     "cssVariables": true,
     "prefix": ""
   },
+  "iconLibrary": "lucide",
   "aliases": {
     "components": "~/common/components",
     "utils": "~/common/lib/utils",
@@ -17,5 +18,7 @@
     "lib": "~/common/lib",
     "hooks": "~/common/hooks"
   },
-  "iconLibrary": "lucide"
+  "registries": {
+    "@magicui": "https://magicui.design/r/{name}.json"
+  }
 }

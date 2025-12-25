@@ -16,7 +16,7 @@ export function meta({}: Route.MetaArgs) {
 export default function Home() {
   return (
     <div className="flex flex-col gap-24">
-      <div className="grid grid-cols-3 gap-4">
+      <div className="3xl:grid-cols-5 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
         <div className="flex flex-col">
           <H2>Today's Products</H2>
           <TypographyLarge>
@@ -40,7 +40,7 @@ export default function Home() {
           />
         ))}
       </div>
-      <div className="grid grid-cols-3 gap-4">
+      <div className="3xl:grid-cols-5 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
         <div className="flex flex-col">
           <H2>Latest Discussion</H2>
           <TypographyLarge>
@@ -64,7 +64,7 @@ export default function Home() {
           />
         ))}
       </div>
-      <div className="grid grid-cols-3 gap-4">
+      <div className="3xl:grid-cols-5 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
         <div className="flex flex-col">
           <H2>IdeasGPT</H2>
           <TypographyLarge>Find ideas for your next project</TypographyLarge>
@@ -86,7 +86,7 @@ export default function Home() {
           />
         ))}
       </div>
-      <div className="grid grid-cols-3 gap-4">
+      <div className="3xl:grid-cols-5 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
         <div className="flex flex-col">
           <H2>Latest Jobs</H2>
           <TypographyLarge>Find your dream job.</TypographyLarge>
@@ -111,7 +111,7 @@ export default function Home() {
           />
         ))}
       </div>
-      <div className="grid grid-cols-3 gap-4">
+      <div className="3xl:grid-cols-5 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
         <div className="flex flex-col">
           <H2>Find a team mate</H2>
           <TypographyLarge>
