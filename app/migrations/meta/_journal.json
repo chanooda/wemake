@@ -29,6 +29,13 @@
       "when": 1766816210925,
       "tag": "0003_same_agent_zero",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1766816760839,
+      "tag": "0004_early_rumiko_fujikawa",
+      "breakpoints": true
     }
   ]
 }
