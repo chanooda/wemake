@@ -36,6 +36,20 @@
       "when": 1766816760839,
       "tag": "0004_early_rumiko_fujikawa",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1766817477848,
+      "tag": "0005_optimal_maximus",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1766818140784,
+      "tag": "0006_magenta_sister_grimm",
+      "breakpoints": true
     }
   ]
 }

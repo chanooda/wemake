@@ -5,6 +5,7 @@ import { TextField } from "~/common/components/textfield";
 import { Button } from "~/common/components/ui/button";
 import { LINK } from "~/common/config";
 import { metadata } from "~/common/config/sitemap";
+import { TEAM_PRODUCT_STAGE_OPTIONS } from "../config/teams.const";
 
 export const meta = () => {
   return metadata[LINK.TEAMS_CREATE];
@@ -28,11 +29,7 @@ const TeamSubmitPage = () => {
             placeholder="Select the stage of your product"
             label="What is the stage of your product?"
             description="Select the stage of your product"
-            options={[
-              { label: "Early Stage", value: "early_stage" },
-              { label: "Growth Stage", value: "growth_stage" },
-              { label: "Mature Stage", value: "mature_stage" },
-            ]}
+            options={TEAM_PRODUCT_STAGE_OPTIONS}
           />
           <TextField
             label="What is the size of your team?"
