@@ -15,6 +15,13 @@
       "when": 1766804409653,
       "tag": "0001_cultured_monster_badoon",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1766813286325,
+      "tag": "0002_glorious_onslaught",
+      "breakpoints": true
     }
   ]
 }
