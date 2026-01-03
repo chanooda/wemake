@@ -1,4 +1,5 @@
 import { useSearchParams } from "react-router";
+import { supabase } from "~/common/api/supabase";
 import { PageTitle } from "~/common/components/page-title";
 import { Button } from "~/common/components/ui/button";
 import { LINK, metadata } from "~/common/config";
@@ -9,12 +10,22 @@ import {
   JOBS_SALARY_RANGE,
 } from "../config/jobs-filter";
 import { JobCard } from "../ui/job-card";
+import type { Route } from "./+types/jobs-page";
 
 export const meta = () => {
   return metadata[LINK.JOBS];
 };
 
-const JobsPage = () => {
+export const loader = async () => {
+  const { data, error } = await supabase.from("jobs").select("*");
+  if (error) {
+    throw new Error(error.message);
+  }
+  return { jobs: data };
+};
+
+const JobsPage = ({ loaderData }: Route.ComponentProps) => {
+  console.log(loaderData);
   const [searchParams, setSearchParams] = useSearchParams();
 
   const handleClickFilter = (key: string, value: string) => {
