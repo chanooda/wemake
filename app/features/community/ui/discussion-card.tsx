@@ -42,8 +42,8 @@ export function DiscussionCard({
         ])}
       >
         <CardHeader className="flex w-full items-center gap-4">
-          <Avatar className="size-10 shrink-0">
-            <AvatarFallback>{author}</AvatarFallback>
+          <Avatar className="size-10 shrink-0 overflow-hidden rounded-full shadow-md">
+            <AvatarFallback>{author.slice(0, 2)}</AvatarFallback>
             <AvatarImage src={authorAvatarUrl} alt={`${author} avatar`} />
           </Avatar>
           <div className="flex flex-col justify-center gap-1">

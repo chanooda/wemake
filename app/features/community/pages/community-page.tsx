@@ -10,14 +10,24 @@ import {
 } from "~/common/components/ui/dropdown-menu";
 import { Input } from "~/common/components/ui/input";
 import { LINK, metadata } from "~/common/config";
+import { getPosts, getTopics } from "../api/queries";
 import { PERIOD_OPTIONS, SORT_OPTIONS } from "../config/community-filter";
 import { DiscussionCard } from "../ui/discussion-card";
+import type { Route } from "./+types/community-page";
 
 export const meta = () => {
   return metadata[LINK.COMMUNITIES];
 };
 
-const CommunityPage = () => {
+export const loader = async () => {
+  const topics = await getTopics();
+  const posts = await getPosts();
+  return { topics, posts };
+};
+
+const CommunityPage = ({
+  loaderData: { posts, topics },
+}: Route.ComponentProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const sorting = searchParams.get("sort") || SORT_OPTIONS[0];
@@ -91,16 +101,17 @@ const CommunityPage = () => {
             </Form>
           </div>
           <div className="flex flex-col gap-4">
-            {Array.from({ length: 10 }).map((_, index) => {
+            {posts.map((post) => {
               return (
                 <DiscussionCard
-                  author="John Doe"
-                  id={String(index)}
-                  title="What is very productivity tool"
-                  authorAvatarUrl="https://github.com/apple.png"
-                  category="productivity"
-                  postedAt="12 hours ago"
-                  key={index}
+                  author={post.author_name}
+                  id={String(post.post_id)}
+                  title={post.title}
+                  authorAvatarUrl={post.author_avatar ?? ""}
+                  category={post.topic_name}
+                  postedAt={post.created_at}
+                  key={post.post_id}
+                  votes={post.upvotes}
                   expanded
                 />
               );
@@ -112,22 +123,15 @@ const CommunityPage = () => {
             TOPICS
           </h3>
           <div className="align-start mt-4 flex flex-col gap-4">
-            {[
-              "Development",
-              "Productivity",
-              "Technology",
-              "Science",
-              "Art",
-              "Music",
-              "Other",
-            ].map((topic) => {
+            {topics.map((topic) => {
+              console.log(topic);
               return (
                 <Link
                   className="text-primary font-semibold hover:underline"
-                  to={LINK.COMMUNITY_TOPIC(topic)}
-                  key={topic}
+                  to={LINK.COMMUNITY_TOPIC(String(topic.slug))}
+                  key={topic.slug}
                 >
-                  {topic}
+                  {topic.name}
                 </Link>
               );
             })}
