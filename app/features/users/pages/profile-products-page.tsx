@@ -15,7 +15,7 @@ const ProfileProductsPage = () => {
           id={String(index)}
           title={`Product Title ${index + 1}`}
           description={`Product Description ${index + 1}`}
-          comments={10}
+          reviews={10}
           views={10}
           votes={10}
         />

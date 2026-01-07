@@ -4,7 +4,7 @@ import { PageTitle } from "~/common/components/page-title";
 import { Pagination } from "~/common/components/pagination";
 import { Button } from "~/common/components/ui/button";
 import { getMetadataTitle, LINK } from "~/common/config";
-import { monthlySchema } from "~/common/model/schema";
+import { monthlySchema } from "~/common/model/dateSchema";
 import { ProductCard } from "../ui/new-product-card";
 import type { Route } from "./+types/monthly-leaderboards-page";
 
@@ -93,7 +93,7 @@ export default function DailyLeaderboardsPage({
             id={String(i)}
             title="Product"
             description="This is a description of the product. It provides information about"
-            comments={12}
+            reviews={12}
             views={4}
             votes={120}
           />

@@ -14,7 +14,7 @@ import { LINK } from "~/common/config";
 interface ProductCardProps {
   title: string;
   description: string;
-  comments: number;
+  reviews: number;
   views: number;
   votes: number;
   id: string;
@@ -24,7 +24,7 @@ export function ProductCard({
   id,
   title,
   description,
-  comments,
+  reviews,
   views,
   votes,
 }: ProductCardProps) {
@@ -33,11 +33,13 @@ export function ProductCard({
       <Card className="space-between flex flex-row gap-4 px-6">
         <CardHeader className="w-full p-0">
           <CardTitle className="text-lg">{title}</CardTitle>
-          <CardDescription>{description}</CardDescription>
+          <CardDescription className="line-clamp-4">
+            {description}
+          </CardDescription>
           <div className="text-muted-foreground flex gap-2">
             <div className="flex items-center gap-1">
               <MessageCircleIcon size={16} />
-              <TypographySmall>{comments}</TypographySmall>
+              <TypographySmall>{reviews}</TypographySmall>
             </div>
             <div className="flex items-center gap-1">
               <EyeIcon size={16} />

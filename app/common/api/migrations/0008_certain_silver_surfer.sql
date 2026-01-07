@@ -1,0 +1,1 @@
+ALTER TABLE "products" ALTER COLUMN "status" SET DEFAULT '{"views":0,"reviews":0,"upvotes":0}'::jsonb;

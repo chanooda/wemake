@@ -7,7 +7,7 @@ import {
 } from "@react-router/dev/routes";
 
 export default [
-  index("routes/home.tsx"),
+  index("./home.tsx"),
 
   ...prefix("products", [
     index("features/products/pages/products-page.tsx"),

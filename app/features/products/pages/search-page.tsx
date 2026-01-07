@@ -4,7 +4,7 @@ import { Pagination } from "~/common/components/pagination";
 import { Button } from "~/common/components/ui/button";
 import { Input } from "~/common/components/ui/input";
 import { LINK, metadata } from "~/common/config";
-import { searchSchema } from "~/common/model/schema";
+import { searchSchema } from "~/common/model/dateSchema";
 import { ProductCard } from "../ui/new-product-card";
 import type { Route } from "./+types/search-page";
 
@@ -45,7 +45,7 @@ export default function SearchPage({ loaderData }: Route.ComponentProps) {
             id={String(i)}
             title="Product"
             description="This is a description of the product. It provides information about"
-            comments={12}
+            reviews={12}
             views={4}
             votes={120}
           />

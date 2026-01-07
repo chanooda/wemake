@@ -8,16 +8,21 @@ import { JobCard } from "~/features/jobs/ui/job-card";
 import { ProductCard } from "~/features/products/ui/new-product-card";
 import { TeamCard } from "~/features/teams/ui/team-card";
 import type { Route } from "./+types/home";
+import { getProductsByDate } from "./entities/jobs/api/queries";
 
 export function meta({}: Route.MetaArgs) {
   return metadata[LINK.HOME];
 }
 
 export const loader = async () => {
-  return {};
+  const products = await getProductsByDate("day");
+
+  return { products };
 };
 
-export default function Home() {
+export default function Home({ loaderData }: Route.ComponentProps) {
+  const { products } = loaderData;
+  console.log(products);
   return (
     <div className="flex flex-col gap-24">
       <div className="3xl:grid-cols-5 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
@@ -32,15 +37,15 @@ export default function Home() {
             </Link>
           </Button>
         </div>
-        {Array.from({ length: 10 }, (_, i) => (
+        {products.map((product) => (
           <ProductCard
-            key={i}
-            id={String(i)}
-            title="Product"
-            description="This is a description of the product. It provides information about"
-            comments={12}
-            views={4}
-            votes={120}
+            key={product.product_id}
+            id={String(product.product_id)}
+            title={product.name}
+            description={product.description}
+            reviews={product.reviews as number}
+            views={product.views as number}
+            votes={product.upvotes as number}
           />
         ))}
       </div>

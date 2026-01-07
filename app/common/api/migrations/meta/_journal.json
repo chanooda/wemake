@@ -57,6 +57,13 @@
       "when": 1767697493046,
       "tag": "0007_foamy_spyke",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1767790370541,
+      "tag": "0008_certain_silver_surfer",
+      "breakpoints": true
     }
   ]
 }

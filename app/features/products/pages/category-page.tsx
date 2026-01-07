@@ -21,7 +21,7 @@ export default function CategoryPage() {
             id={String(i)}
             title="Product"
             description="This is a description of the product. It provides information about"
-            comments={12}
+            reviews={12}
             views={4}
             votes={120}
           />
