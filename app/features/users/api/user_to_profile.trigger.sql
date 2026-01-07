@@ -1,5 +1,5 @@
-create function public.handle_new_user()
-returns trigger
+CREATE FUNCTION public.handle_new_user()
+RETURNS trigger
 language plpgsql
 security definer
 set search_path = ''
@@ -15,6 +15,6 @@ begin
 end;
 $$;
 
-create trigger user_to_profile_trigger
-after insert on auth.users
-for each row execute function public.handle_new_user();
+CREATE TRIGGER user_to_profile_trigger
+AFTER INSERT ON auth.users
+FOR EACH ROW EXECUTE FUNCTION public.handle_new_user();

@@ -50,6 +50,13 @@
       "when": 1766818140784,
       "tag": "0006_magenta_sister_grimm",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1767697493046,
+      "tag": "0007_foamy_spyke",
+      "breakpoints": true
     }
   ]
 }
