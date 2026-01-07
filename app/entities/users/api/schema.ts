@@ -9,8 +9,8 @@ import {
   timestamp,
   uuid,
 } from "drizzle-orm/pg-core";
-import { posts } from "~/features/community/api/schema";
-import { products } from "~/features/products/api/schema";
+import { posts } from "~/entities/community/api/schema";
+import { products } from "~/entities/products/api/schema";
 import { NOTIFICATION_TYPE_OPTIONS } from "../config/notification.const";
 
 const users = pgSchema("auth").table("users", {
@@ -126,3 +126,4 @@ export const messages = pgTable("messages", {
   content: text().notNull(),
   created_at: timestamp().notNull().defaultNow(),
 });
+

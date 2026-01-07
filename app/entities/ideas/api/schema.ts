@@ -7,7 +7,7 @@ import {
   timestamp,
   uuid,
 } from "drizzle-orm/pg-core";
-import { profiles } from "~/features/users/api/schema";
+import { profiles } from "~/entities/users/api/schema";
 
 export const gptIdeas = pgTable("gpt_ideas", {
   gpt_idea_id: bigint({ mode: "number" })

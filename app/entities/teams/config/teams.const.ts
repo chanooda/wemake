@@ -3,3 +3,4 @@ export const TEAM_PRODUCT_STAGE_OPTIONS = [
   { label: "Growth Stage", value: "growth_stage" },
   { label: "Mature Stage", value: "mature_stage" },
 ];
+

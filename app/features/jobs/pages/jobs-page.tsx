@@ -8,7 +8,7 @@ import {
   JOBS_FILTER_LOCATION,
   JOBS_FILTER_TYPE,
   JOBS_SALARY_RANGE,
-} from "../config/jobs-filter";
+} from "../../../entities/jobs/config/jobs-filter";
 import { JobCard } from "../ui/job-card";
 import type { Route } from "./+types/jobs-page";
 

@@ -10,7 +10,7 @@ import {
   timestamp,
   uuid,
 } from "drizzle-orm/pg-core";
-import { profiles } from "~/features/users/api/schema";
+import { profiles } from "~/entities/users/api/schema";
 
 export const products = pgTable("products", {
   product_id: bigint({ mode: "number" })

@@ -4,3 +4,4 @@ export const NOTIFICATION_TYPE_OPTIONS = [
   { label: "Reply", value: "reply" },
   { label: "Mention", value: "mention" },
 ];
+

@@ -13,6 +13,10 @@ export function meta({}: Route.MetaArgs) {
   return metadata[LINK.HOME];
 }
 
+export const loader = async () => {
+  return {};
+};
+
 export default function Home() {
   return (
     <div className="flex flex-col gap-24">

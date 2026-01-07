@@ -5,7 +5,7 @@ import { TextField } from "~/common/components/textfield";
 import { Button } from "~/common/components/ui/button";
 import { LINK } from "~/common/config";
 import { metadata } from "~/common/config/sitemap";
-import { TEAM_PRODUCT_STAGE_OPTIONS } from "../config/teams.const";
+import { TEAM_PRODUCT_STAGE_OPTIONS } from "~/entities/teams/config/teams.const";
 
 export const meta = () => {
   return metadata[LINK.TEAMS_CREATE];

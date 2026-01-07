@@ -9,7 +9,7 @@ import {
   JOBS_FILTER_LOCATION,
   JOBS_FILTER_TYPE,
   JOBS_SALARY_RANGE,
-} from "../config/jobs-filter";
+} from "../../../entities/jobs/config/jobs-filter";
 
 export const meta = () => {
   return metadata[LINK.JOBS_SUBMIT];

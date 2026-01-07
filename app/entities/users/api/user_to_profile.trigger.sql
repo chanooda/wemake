@@ -18,3 +18,4 @@ $$;
 CREATE TRIGGER user_to_profile_trigger
 AFTER INSERT ON auth.users
 FOR EACH ROW EXECUTE FUNCTION public.handle_new_user();
+
