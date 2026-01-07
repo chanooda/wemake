@@ -4,7 +4,11 @@ import { PageTitle } from "~/common/components/page-title";
 import { Pagination } from "~/common/components/pagination";
 import { Button } from "~/common/components/ui/button";
 import { getMetadataTitle, LINK } from "~/common/config";
-import { yearlySchema } from "~/common/model/dateSchema";
+import { yearlySchema } from "~/common/model/reqSchema";
+import {
+  getProductsByDateRange,
+  getProductsPagesByDateRange,
+} from "~/entities/products/api/queries";
 import { ProductCard } from "../ui/new-product-card";
 import type { Route } from "./+types/yearly-leaderboards-page";
 
@@ -22,7 +26,7 @@ export const meta: Route.MetaFunction = ({ params }) => {
   ];
 };
 
-export function loader({ params }: Route.LoaderArgs) {
+export async function loader({ params, request }: Route.LoaderArgs) {
   const { success, data: parsedData } = yearlySchema.safeParse(params);
   if (!success) {
     throw data(
@@ -58,14 +62,29 @@ export function loader({ params }: Route.LoaderArgs) {
     );
   }
 
-  return { ...parsedData };
+  const url = new URL(request.url);
+
+  const products = await getProductsByDateRange({
+    from: date.startOf("year"),
+    to: date.endOf("year"),
+    limit: 15,
+    page: Number(url.searchParams.get("page") || "1"),
+  });
+
+  const pages = await getProductsPagesByDateRange({
+    from: date.startOf("year"),
+    to: date.endOf("year"),
+  });
+
+  return { parsedData, products, pages };
 }
 
 export default function DailyLeaderboardsPage({
   loaderData,
 }: Route.ComponentProps) {
   console.log(loaderData);
-  const date = DateTime.fromObject(loaderData);
+  const { parsedData, products, pages } = loaderData;
+  const date = DateTime.fromObject(parsedData);
   const prevDate = date.minus({ year: 1 });
   const nextDate = date.plus({ year: 1 });
   const isToday = date.hasSame(DateTime.now(), "year");
@@ -88,18 +107,18 @@ export default function DailyLeaderboardsPage({
             </Button>
           )}
         </div>
-        {Array.from({ length: 10 }, (_, i) => (
+        {products.map((product) => (
           <ProductCard
-            key={i}
-            id={String(i)}
-            title="Product"
+            key={product.product_id}
+            id={String(product.product_id)}
+            title={product.name}
             description="This is a description of the product. It provides information about"
-            reviews={12}
-            views={4}
-            votes={120}
+            reviews={product.reviews as number}
+            views={product.views as number}
+            votes={product.upvotes as number}
           />
         ))}
-        <Pagination totalPage={10} />
+        <Pagination totalPage={pages} />
       </div>
     </div>
   );

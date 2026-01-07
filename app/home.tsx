@@ -8,7 +8,7 @@ import { JobCard } from "~/features/jobs/ui/job-card";
 import { ProductCard } from "~/features/products/ui/new-product-card";
 import { TeamCard } from "~/features/teams/ui/team-card";
 import type { Route } from "./+types/home";
-import { getProductsByDate } from "./entities/jobs/api/queries";
+import { getProductsByDate } from "./entities/products/api/queries";
 
 export function meta({}: Route.MetaArgs) {
   return metadata[LINK.HOME];

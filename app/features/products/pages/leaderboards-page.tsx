@@ -3,7 +3,7 @@ import { PageTitle } from "~/common/components/page-title";
 import { Button } from "~/common/components/ui/button";
 import { H2, TypographyLarge } from "~/common/components/ui/typography";
 import { LINK, metadata } from "~/common/config";
-import { getProductsByDate } from "~/entities/jobs/api/queries";
+import { getProductsByDate } from "~/entities/products/api/queries";
 import { ProductCard } from "../ui/new-product-card";
 import type { Route } from "./+types/leaderboards-page";
 

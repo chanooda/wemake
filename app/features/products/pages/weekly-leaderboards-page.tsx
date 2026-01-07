@@ -4,7 +4,11 @@ import { PageTitle } from "~/common/components/page-title";
 import { Pagination } from "~/common/components/pagination";
 import { Button } from "~/common/components/ui/button";
 import { getMetadataTitle, LINK } from "~/common/config";
-import { weeklySchema } from "~/common/model/dateSchema";
+import { weeklySchema } from "~/common/model/reqSchema";
+import {
+  getProductsByDateRange,
+  getProductsPagesByDateRange,
+} from "~/entities/products/api/queries";
 import { ProductCard } from "../ui/new-product-card";
 import type { Route } from "./+types/weekly-leaderboards-page";
 
@@ -12,7 +16,10 @@ export const meta: Route.MetaFunction = ({ params }) => {
   const { success, data } = weeklySchema.safeParse(params);
   let title = "The best products of this week";
   if (success) {
-    const date = DateTime.fromObject(data);
+    const date = DateTime.fromObject({
+      weekYear: data.year,
+      weekNumber: data.week,
+    });
     title = `The best products of ${date
       .startOf("week")
       .toLocaleString(DateTime.DATE_SHORT)} - ${date
@@ -26,7 +33,7 @@ export const meta: Route.MetaFunction = ({ params }) => {
   ];
 };
 
-export function loader({ params }: Route.LoaderArgs) {
+export async function loader({ params, request }: Route.LoaderArgs) {
   const { success, data: parsedData } = weeklySchema.safeParse(params);
   if (!success) {
     throw data(
@@ -63,16 +70,31 @@ export function loader({ params }: Route.LoaderArgs) {
     );
   }
 
-  return { ...parsedData };
+  const url = new URL(request.url);
+
+  const products = await getProductsByDateRange({
+    from: date.startOf("week"),
+    to: date.endOf("week"),
+    limit: 15,
+    page: Number(url.searchParams.get("page") || "1"),
+  });
+
+  const pages = await getProductsPagesByDateRange({
+    from: date.startOf("week"),
+    to: date.endOf("week"),
+  });
+
+  return { parsedData, products, pages };
 }
 
 export default function DailyLeaderboardsPage({
   loaderData,
 }: Route.ComponentProps) {
-  console.log(loaderData);
+  const { parsedData, products, pages } = loaderData;
+
   const date = DateTime.fromObject({
-    weekYear: loaderData.year,
-    weekNumber: loaderData.week,
+    weekYear: parsedData.year,
+    weekNumber: parsedData.week,
   });
   const prevDate = date.minus({ weeks: 1 });
   const nextDate = date.plus({ weeks: 1 });
@@ -83,6 +105,8 @@ export default function DailyLeaderboardsPage({
   const nextUrl =
     LINK.PRODUCT_LEADERBOARDS_REDIRECT("weekly") +
     `/${nextDate.weekYear}/${nextDate.weekNumber}`;
+
+  console.log(products);
 
   return (
     <div>
@@ -104,18 +128,18 @@ export default function DailyLeaderboardsPage({
             </Button>
           )}
         </div>
-        {Array.from({ length: 10 }, (_, i) => (
+        {products.map((product) => (
           <ProductCard
-            key={i}
-            id={String(i)}
-            title="Product"
-            description="This is a description of the product. It provides information about"
-            reviews={12}
-            views={4}
-            votes={120}
+            key={product.product_id}
+            id={String(product.product_id)}
+            title={product.name}
+            description={product.description}
+            reviews={product.reviews as number}
+            views={product.views as number}
+            votes={product.upvotes as number}
           />
         ))}
-        <Pagination totalPage={10} />
+        <Pagination totalPage={pages} />
       </div>
     </div>
   );

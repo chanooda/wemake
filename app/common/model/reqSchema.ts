@@ -22,5 +22,5 @@ export const yearlySchema = z.object({
 
 export const searchSchema = z.object({
   query: z.string().optional().default(""),
-  page: z.coerce.number().optional().default(1),
+  page: z.coerce.number().min(1).optional().default(1),
 });

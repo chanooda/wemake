@@ -4,7 +4,7 @@ import { Pagination } from "~/common/components/pagination";
 import { Button } from "~/common/components/ui/button";
 import { Input } from "~/common/components/ui/input";
 import { LINK, metadata } from "~/common/config";
-import { searchSchema } from "~/common/model/dateSchema";
+import { searchSchema } from "~/common/model/reqSchema";
 import { ProductCard } from "../ui/new-product-card";
 import type { Route } from "./+types/search-page";
 
