@@ -10,8 +10,8 @@ import {
 } from "~/common/components/ui/dropdown-menu";
 import { Input } from "~/common/components/ui/input";
 import { LINK, metadata } from "~/common/config";
-import { getPosts, getTopics } from "../../../entities/community/api/queries";
 import { PERIOD_OPTIONS, SORT_OPTIONS } from "~/entities/community/config/community-filter";
+import { getPosts, getTopics } from "../../../entities/community/api/queries";
 import { DiscussionCard } from "../ui/discussion-card";
 import type { Route } from "./+types/community-page";
 
@@ -29,8 +29,8 @@ const CommunityPage = ({
 }: Route.ComponentProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const sorting = searchParams.get("sort") || SORT_OPTIONS[0];
-  const period = searchParams.get("period") || PERIOD_OPTIONS[0];
+  const sorting = searchParams.get("sort") || SORT_OPTIONS[0].label;
+  const period = searchParams.get("period") || PERIOD_OPTIONS[0].label;
 
   return (
     <div>
@@ -52,15 +52,15 @@ const CommunityPage = ({
                           onCheckedChange={(checked) => {
                             if (checked) {
                               setSearchParams((searchParams) => {
-                                searchParams.set("sort", option);
+                                searchParams.set("sort", option.value);
                                 return searchParams;
                               });
                             }
                           }}
                           className="capitalize"
-                          key={option}
+                          key={option.value}
                         >
-                          <span>{option}</span>
+                          <span>{option.label}</span>
                         </DropdownMenuCheckboxItem>
                       );
                     })}
@@ -78,15 +78,15 @@ const CommunityPage = ({
                           onCheckedChange={(checked) => {
                             if (checked) {
                               setSearchParams((searchParams) => {
-                                searchParams.set("period", option);
+                                searchParams.set("period", option.value);
                                 return searchParams;
                               });
                             }
                           }}
                           className="capitalize"
-                          key={option}
+                          key={option.value}
                         >
-                          <span>{option}</span>
+                          <span>{option.label}</span>
                         </DropdownMenuCheckboxItem>
                       );
                     })}

@@ -1,2 +1,1 @@
-export * from "./req.types";
-export * from "./reqSchema";
+export * from "./req.schema";

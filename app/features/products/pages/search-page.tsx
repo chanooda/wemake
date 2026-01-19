@@ -4,7 +4,7 @@ import { Pagination } from "~/common/components/pagination";
 import { Button } from "~/common/components/ui/button";
 import { Input } from "~/common/components/ui/input";
 import { LINK, metadata } from "~/common/config";
-import { searchSchema } from "~/common/model/reqSchema";
+import { productsLeaderboardsSchema } from "~/entities/products";
 import { ProductCard } from "../ui/new-product-card";
 import type { Route } from "./+types/search-page";
 
@@ -14,7 +14,7 @@ export const meta: Route.MetaFunction = () => {
 
 export const loader = ({ request }: Route.LoaderArgs) => {
   const url = new URL(request.url);
-  const { success, data } = searchSchema.safeParse(
+  const { success, data } = productsLeaderboardsSchema.safeParse(
     Object.fromEntries(url.searchParams),
   );
 

@@ -23,9 +23,10 @@ export const loader = async () => {
 };
 
 export default function LeaderboardsPage({ loaderData }: Route.ComponentProps) {
-  console.log(loaderData);
+
   const { dailyProducts, weeklyProducts, monthlyProducts, yearlyProducts } =
     loaderData;
+
   return (
     <div>
       <PageTitle

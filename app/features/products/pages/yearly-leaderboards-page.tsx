@@ -4,7 +4,7 @@ import { PageTitle } from "~/common/components/page-title";
 import { Pagination } from "~/common/components/pagination";
 import { Button } from "~/common/components/ui/button";
 import { getMetadataTitle, LINK } from "~/common/config";
-import { yearlySchema } from "~/common/model/reqSchema";
+import { yearlySchema } from "~/common/model/req.schema";
 import {
   getProductsByDateRange,
   getProductsPagesByDateRange,
@@ -82,7 +82,7 @@ export async function loader({ params, request }: Route.LoaderArgs) {
 export default function DailyLeaderboardsPage({
   loaderData,
 }: Route.ComponentProps) {
-  console.log(loaderData);
+
   const { parsedData, products, pages } = loaderData;
   const date = DateTime.fromObject(parsedData);
   const prevDate = date.minus({ year: 1 });

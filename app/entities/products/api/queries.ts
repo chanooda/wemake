@@ -1,10 +1,10 @@
 import { DateTime } from "luxon";
 import { supabase } from "~/common/api/supabase";
 import type {
+  DateRange,
   DateType,
-  GetByDateRangeReq,
-  GetDefaultReq,
 } from "~/common/model";
+import type { GetProductsByDateRangeReq } from "../model/products-schema";
 
 const PAGE_SIZE = 2;
 
@@ -13,7 +13,7 @@ export const getProductsByDateRange = async ({
   to,
   limit,
   page = 1,
-}: GetDefaultReq) => {
+}: GetProductsByDateRangeReq) => {
   const { data, error } = await supabase
     .from("products")
     .select(
@@ -44,7 +44,7 @@ export const getProductsByDateRange = async ({
 export const getProductsAllCountByDateRange = async ({
   from,
   to,
-}: GetByDateRangeReq) => {
+}: DateRange) => {
   const { count, error } = await supabase
     .from("products")
     .select(`product_id`, { count: "exact", head: true })
@@ -62,7 +62,7 @@ export const getProductsAllCountByDateRange = async ({
 export const getProductsPagesByDateRange = async ({
   from,
   to,
-}: GetByDateRangeReq) => {
+}: DateRange) => {
   const count = await getProductsAllCountByDateRange({ from, to });
   const pages = Math.ceil(count / PAGE_SIZE) || 1;
 

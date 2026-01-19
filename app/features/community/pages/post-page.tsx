@@ -23,7 +23,7 @@ import {
 import { Textarea } from "~/common/components/ui/textarea";
 import { TypographySmall } from "~/common/components/ui/typography";
 import { LINK, getMetadataTitle } from "~/common/config";
-import { Reply } from "../ui/Reply";
+import { Reply } from "../ui/reply";
 import type { Route } from "./+types/post-page";
 
 export const meta = ({ params: { postId } }: Route.MetaArgs) => {

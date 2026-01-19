@@ -4,7 +4,7 @@ import { PageTitle } from "~/common/components/page-title";
 import { Pagination } from "~/common/components/pagination";
 import { Button } from "~/common/components/ui/button";
 import { getMetadataTitle, LINK } from "~/common/config";
-import { dailySchema } from "~/common/model/reqSchema";
+import { dailySchema } from "~/common/model/req.schema";
 import {
   getProductsByDateRange,
   getProductsPagesByDateRange,
