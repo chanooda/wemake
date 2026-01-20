@@ -25,7 +25,6 @@ export const loader = async () => {
 };
 
 const JobsPage = ({ loaderData }: Route.ComponentProps) => {
-  console.log(loaderData);
   const [searchParams, setSearchParams] = useSearchParams();
 
   const handleClickFilter = (key: string, value: string) => {

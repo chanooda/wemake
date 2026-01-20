@@ -106,8 +106,6 @@ export default function DailyLeaderboardsPage({
     LINK.PRODUCT_LEADERBOARDS_REDIRECT("weekly") +
     `/${nextDate.weekYear}/${nextDate.weekNumber}`;
 
-  console.log(products);
-
   return (
     <div>
       <PageTitle

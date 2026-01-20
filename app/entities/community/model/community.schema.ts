@@ -1,11 +1,15 @@
 import { z } from "zod";
-import { periodSchema } from "~/common/model";
+import { limitSchema, pageSchema, periodSchema, querySchema } from "~/common/model";
 
 
-export const communitySortSchema = z.enum(["newest", "popular"]);
+export const communitySortEnum = z.enum(["newest", "popular"]);
 
 export const communitySchema = z.object({
-    sort: communitySortSchema.default("newest"),
+    sort: communitySortEnum.default("newest"),
     topic: z.string().optional(),
     ...periodSchema.shape,
+    ...pageSchema.shape,
+    ...querySchema.shape,
+    ...limitSchema.shape,
 })
+export type CommunitySchema = z.infer<typeof communitySchema> 

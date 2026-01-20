@@ -448,6 +448,7 @@ export type Database = {
           title: string
           topic_id: number | null
           updated_at: string
+          upvotes: number | null
         }
         Insert: {
           content: string
@@ -457,6 +458,7 @@ export type Database = {
           title: string
           topic_id?: number | null
           updated_at?: string
+          upvotes?: number | null
         }
         Update: {
           content?: string
@@ -466,6 +468,7 @@ export type Database = {
           title?: string
           topic_id?: number | null
           updated_at?: string
+          upvotes?: number | null
         }
         Relationships: [
           {
@@ -729,6 +732,7 @@ export type Database = {
           post_id: number | null
           title: string | null
           topic_name: string | null
+          topic_slug: string | null
           updated_at: string | null
           upvotes: number | null
         }

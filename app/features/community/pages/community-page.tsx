@@ -1,6 +1,7 @@
 import { ChevronDownIcon } from "lucide-react";
 import { Form, Link, useSearchParams } from "react-router";
 import { PageTitle } from "~/common/components/page-title";
+import { Pagination } from "~/common/components/pagination";
 import { Button } from "~/common/components/ui/button";
 import {
   DropdownMenu,
@@ -11,6 +12,7 @@ import {
 import { Input } from "~/common/components/ui/input";
 import { LINK, metadata } from "~/common/config";
 import { PERIOD_OPTIONS, SORT_OPTIONS } from "~/entities/community/config/community-filter";
+import { communitySchema } from "~/entities/community/model/community.schema";
 import { getPosts, getTopics } from "../../../entities/community/api/queries";
 import { DiscussionCard } from "../ui/discussion-card";
 import type { Route } from "./+types/community-page";
@@ -19,8 +21,15 @@ export const meta = () => {
   return metadata[LINK.COMMUNITIES];
 };
 
-export const loader = async () => {
-  const [topics, posts] = await Promise.all([getTopics(), getPosts()]);
+export const loader = async ({request}:Route.LoaderArgs) => {
+  const url = new URL(request.url);
+  const {success, data} = communitySchema.safeParse(Object.fromEntries(url.searchParams));
+
+  if(!success) {
+    throw new Error("Invalid parameters");
+  }
+
+  const [topics, posts] = await Promise.all([getTopics(), getPosts(data)]);
   return { topics, posts };
 };
 
@@ -30,7 +39,9 @@ const CommunityPage = ({
   const [searchParams, setSearchParams] = useSearchParams();
 
   const sorting = searchParams.get("sort") || SORT_OPTIONS[0].label;
-  const period = searchParams.get("period") || PERIOD_OPTIONS[0].label;
+  const period = PERIOD_OPTIONS.find((option) => option.value === searchParams.get("period"))?.label || PERIOD_OPTIONS[0].label;
+
+  const {data, meta} = posts;
 
   return (
     <div>
@@ -96,11 +107,11 @@ const CommunityPage = ({
               <Button>Create Discussion</Button>
             </div>
             <Form className="mt-4 w-2/3">
-              <Input placeholder="Search for a discussion" />
+              <Input name="query" placeholder="Search for a discussion" />
             </Form>
           </div>
           <div className="flex flex-col gap-4">
-            {posts.map((post) => {
+            {data.map((post) => {
               return (
                 <DiscussionCard
                   author={post.author_name}
@@ -116,6 +127,7 @@ const CommunityPage = ({
               );
             })}
           </div>
+          <Pagination totalPage={meta.pages} />
         </div>
         <aside className="col-span-2">
           <h3 className="text-muted-foreground text-lg font-semibold">
@@ -123,7 +135,6 @@ const CommunityPage = ({
           </h3>
           <div className="align-start mt-4 flex flex-col gap-4">
             {topics.map((topic) => {
-              console.log(topic);
               return (
                 <Link
                   className="text-primary font-semibold hover:underline"

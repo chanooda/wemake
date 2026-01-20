@@ -6,7 +6,7 @@ import type {
 } from "~/common/model";
 import type { GetProductsByDateRangeReq } from "../model/products-schema";
 
-const PAGE_SIZE = 2;
+const PAGE_SIZE = 1
 
 export const getProductsByDateRange = async ({
   from,
@@ -30,7 +30,7 @@ export const getProductsByDateRange = async ({
     )
     .order("status->reviews", { ascending: false })
     .gte("created_at", from.toISO())
-    .lte("created_at", to.toISO())
+    .lte("created_at", to.toISO())         
     .limit(limit)
     .range((page - 1) * PAGE_SIZE, page * PAGE_SIZE - 1);
 
