@@ -1,25 +1,38 @@
 import { PageTitle } from "~/common/components/page-title";
 import { LINK, metadata } from "~/common/config";
+import { getIdeas } from "~/entities/ideas";
 import { IdeaCard } from "../ui/idea-card";
+import type { Route } from "./+types/ideas-page";
+
+
 
 export const meta = () => {
   return metadata[LINK.IDEAS];
 };
 
-const IdeasPage = () => {
+export const loader = async () => {
+  const ideas = await getIdeas({limit:10})
+
+  return {ideas}
+}
+
+const IdeasPage = ({loaderData}:Route.ComponentProps) => {
+
+  const {ideas} = loaderData
+
   return (
     <div>
       <PageTitle title="IdeasGPT" subTitle="Find your ideas" />
       <div className="grid grid-cols-4 gap-4">
-        {Array.from({ length: 50 }, (_, i) => (
+        {ideas.map((idea, i) => (
           <IdeaCard
-            claimed={i % 2 === 0}
-            key={i}
-            id={String(i)}
-            title={`Idea Title ${i + 1}`}
-            viewsCount={100 + i}
-            postedAt="12 hours ago"
-            likesCount={10 + i}
+            claimed={idea.is_claimed}
+            key={idea.gpt_idea_id}
+            id={String(idea.gpt_idea_id)}
+            title={idea.idea}
+            viewsCount={idea.views}
+            postedAt={idea.created_at}
+            likesCount={idea.likes}
           />
         ))}
       </div>

@@ -1,4 +1,5 @@
 import { DotIcon, EyeIcon, HeartIcon, LockIcon } from "lucide-react";
+import { DateTime } from "luxon";
 import { Link } from "react-router";
 import { Button } from "~/common/components/ui/button";
 import {
@@ -47,7 +48,7 @@ export const IdeaCard = ({
             <EyeIcon size={16} />
             <TypographySmall>{viewsCount}</TypographySmall>
             <DotIcon size={16} />
-            <TypographySmall>{postedAt}</TypographySmall>
+            <TypographySmall>{DateTime.fromISO(postedAt).toRelative()}</TypographySmall>
           </div>
         </CardContent>
         <CardFooter className="justify-end gap-2">
