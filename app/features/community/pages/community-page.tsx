@@ -11,9 +11,8 @@ import {
 } from "~/common/components/ui/dropdown-menu";
 import { Input } from "~/common/components/ui/input";
 import { LINK, metadata } from "~/common/config";
-import { PERIOD_OPTIONS, SORT_OPTIONS } from "~/entities/community/config/community-filter";
-import { communitySchema } from "~/entities/community/model/community.schema";
-import { getPosts, getTopics } from "../../../entities/community/api/queries";
+import { communitySchema, getPosts, getTopics } from "~/entities/community";
+import { PERIOD_OPTIONS, SORT_OPTIONS } from "../config/community-filter";
 import { DiscussionCard } from "../ui/discussion-card";
 import type { Route } from "./+types/community-page";
 

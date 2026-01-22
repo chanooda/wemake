@@ -1,26 +1,20 @@
-import { bigint, pgEnum, pgTable, text } from "drizzle-orm/pg-core";
-import {
-  JOBS_FILTER_LOCATION,
-  JOBS_FILTER_TYPE,
-  JOBS_SALARY_RANGE,
-} from "../config/jobs-filter";
+import { bigint, pgEnum, pgTable, text, timestamp } from "drizzle-orm/pg-core";
+import { JOBS_FILTER_LOCATION_ENUM, JOBS_FILTER_SALARY_RANGE_ENUM, JOBS_FILTER_TIME_ENUM } from "../config/jobs.const";
+
 
 export const job_type = pgEnum(
   "job_type",
-  JOBS_FILTER_TYPE.map((type) => type.value) as [string, ...string[]],
+  JOBS_FILTER_TIME_ENUM as [string, ...string[]],
 );
 
 export const locations = pgEnum(
   "locations",
-  JOBS_FILTER_LOCATION.map((location) => location.value) as [
-    string,
-    ...string[],
-  ],
+  JOBS_FILTER_LOCATION_ENUM as [string, ...string[],],
 );
 
 export const salary_range = pgEnum(
   "salary_range",
-  JOBS_SALARY_RANGE.map((range) => range.value) as [string, ...string[]],
+  JOBS_FILTER_SALARY_RANGE_ENUM as [string, ...string[]],
 );
 
 export const jobs = pgTable("jobs", {
@@ -39,4 +33,6 @@ export const jobs = pgTable("jobs", {
   job_type: job_type().notNull(),
   location: locations().notNull(),
   salary_range: salary_range().notNull(),
+  created_at: timestamp().notNull().defaultNow(),
+  updated_at: timestamp().notNull().defaultNow(),
 });

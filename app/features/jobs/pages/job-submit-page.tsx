@@ -7,9 +7,9 @@ import { Button } from "~/common/components/ui/button";
 import { LINK, metadata } from "~/common/config";
 import {
   JOBS_FILTER_LOCATION,
-  JOBS_FILTER_TYPE,
+  JOBS_FILTER_TIME,
   JOBS_SALARY_RANGE,
-} from "../../../entities/jobs/config/jobs-filter";
+} from "../config/jobs-filter";
 
 export const meta = () => {
   return metadata[LINK.JOBS_SUBMIT];
@@ -74,7 +74,7 @@ export default function JobSubmitPage() {
           <Select
             label="Job Type"
             description="Select The type of job"
-            options={JOBS_FILTER_TYPE}
+            options={JOBS_FILTER_TIME}
             placeholder="Select a Job Type"
           />
           <Select

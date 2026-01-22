@@ -1,5 +1,7 @@
 import { Avatar, AvatarImage } from "@radix-ui/react-avatar";
+import { DateTime } from "luxon";
 import { Link } from "react-router";
+import { AvatarFallback } from "~/common/components/ui/avatar";
 import { Badge } from "~/common/components/ui/badge";
 import { Button } from "~/common/components/ui/button";
 import {
@@ -40,14 +42,15 @@ export const JobCard = ({
       <Card>
         <CardHeader className="gap-4">
           <div className="flex items-center gap-3">
-            <Avatar className="size-8">
+            <Avatar className="size-8 shrink-0">
               <AvatarImage src={companyLogoUrl} />
+              <AvatarFallback>{company.slice(0, 2)}</AvatarFallback>
             </Avatar>
             <div className="space-x-2">
               <span className="text-accent-foreground font-semibold">
                 {company}
               </span>
-              <span className="text-muted-foreground text-xs">{postedAt}</span>
+              <span className="text-muted-foreground text-xs">{DateTime.fromISO(postedAt).toRelative()}</span>
             </div>
           </div>
           <CardTitle>{title}</CardTitle>

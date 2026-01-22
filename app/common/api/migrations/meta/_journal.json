@@ -64,6 +64,20 @@
       "when": 1767790370541,
       "tag": "0008_certain_silver_surfer",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1769086133347,
+      "tag": "0009_ordinary_carmella_unuscione",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1769090121196,
+      "tag": "0010_familiar_power_man",
+      "breakpoints": true
     }
   ]
 }

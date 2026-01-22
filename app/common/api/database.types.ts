@@ -151,6 +151,7 @@ export type Database = {
           company_location: string
           company_logo_url: string
           company_name: string
+          created_at: string
           job_id: number
           job_type: Database["public"]["Enums"]["job_type"]
           location: Database["public"]["Enums"]["locations"]
@@ -160,6 +161,7 @@ export type Database = {
           responsibilities: string
           salary_range: Database["public"]["Enums"]["salary_range"]
           skills: string
+          updated_at: string
         }
         Insert: {
           apply_url: string
@@ -168,6 +170,7 @@ export type Database = {
           company_location: string
           company_logo_url: string
           company_name: string
+          created_at?: string
           job_id?: never
           job_type: Database["public"]["Enums"]["job_type"]
           location: Database["public"]["Enums"]["locations"]
@@ -177,6 +180,7 @@ export type Database = {
           responsibilities: string
           salary_range: Database["public"]["Enums"]["salary_range"]
           skills: string
+          updated_at?: string
         }
         Update: {
           apply_url?: string
@@ -185,6 +189,7 @@ export type Database = {
           company_location?: string
           company_logo_url?: string
           company_name?: string
+          created_at?: string
           job_id?: never
           job_type?: Database["public"]["Enums"]["job_type"]
           location?: Database["public"]["Enums"]["locations"]
@@ -194,6 +199,7 @@ export type Database = {
           responsibilities?: string
           salary_range?: Database["public"]["Enums"]["salary_range"]
           skills?: string
+          updated_at?: string
         }
         Relationships: []
       }
@@ -772,12 +778,12 @@ export type Database = {
         | "founder"
         | "product-manager"
       salary_range:
-        | "0 - 50000"
-        | "50000 - 70000"
-        | "70000 - 100000"
-        | "100000 - 120000"
-        | "120000 - 150000"
-        | "150000 - 250000"
+        | "0-50000"
+        | "50000-70000"
+        | "70000-100000"
+        | "100000-120000"
+        | "120000-150000"
+        | "150000-250000"
         | "250000+"
     }
     CompositeTypes: {
@@ -912,12 +918,12 @@ export const Constants = {
       product_stage: ["early_stage", "growth_stage", "mature_stage"],
       role: ["developer", "designer", "marketer", "founder", "product-manager"],
       salary_range: [
-        "0 - 50000",
-        "50000 - 70000",
-        "70000 - 100000",
-        "100000 - 120000",
-        "120000 - 150000",
-        "150000 - 250000",
+        "0-50000",
+        "50000-70000",
+        "70000-100000",
+        "100000-120000",
+        "120000-150000",
+        "150000-250000",
         "250000+",
       ],
     },
