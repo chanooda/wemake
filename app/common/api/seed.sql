@@ -27,13 +27,13 @@ INSERT INTO categories (name, description, created_at, updated_at) VALUES
 ('Design Tools', 'Design and creative tools', NOW(), NOW()),
 ('Productivity', 'Productivity and workflow tools', NOW(), NOW());
 
--- 4. Team (no profile_id dependency)
-INSERT INTO team (product_name, team_size, equity_split, product_stage, roles, product_description, created_at, updated_at) VALUES
-('Project Alpha', 5, 20, 'early_stage', 'Full Stack Developer, UI/UX Designer, Product Manager', 'A revolutionary project management tool for remote teams', NOW(), NOW()),
-('Beta Platform', 8, 25, 'growth_stage', 'Backend Engineer, Frontend Developer, DevOps Engineer, Designer', 'An innovative platform connecting creators with their audience', NOW(), NOW()),
-('Gamma App', 3, 15, 'early_stage', 'Mobile Developer, Backend Developer, Designer', 'A mobile-first social networking application', NOW(), NOW()),
-('Delta Service', 10, 30, 'mature_stage', 'Multiple developers, designers, marketers, support staff', 'A comprehensive service platform for businesses', NOW(), NOW()),
-('Epsilon Tool', 6, 22, 'growth_stage', 'Full Stack Developer, Designer, Marketing Lead', 'An AI-powered tool for content creators', NOW(), NOW());
+-- 4. Teams (depends on team_leader profile_id)
+INSERT INTO teams (product_name, team_size, equity_split, product_stage, roles, product_description, team_leader_id, created_at, updated_at) VALUES
+('Project Alpha', 5, 20, 'early_stage', 'Full Stack Developer, UI/UX Designer, Product Manager', 'A revolutionary project management tool for remote teams', 'bd6f9911-da12-459c-994f-4ea2a646c4bf', NOW(), NOW()),
+('Beta Platform', 8, 25, 'growth_stage', 'Backend Engineer, Frontend Developer, DevOps Engineer, Designer', 'An innovative platform connecting creators with their audience', 'eb5fb274-b4df-4292-a2dd-f7a72563e15c', NOW(), NOW()),
+('Gamma App', 3, 15, 'early_stage', 'Mobile Developer, Backend Developer, Designer', 'A mobile-first social networking application', 'cd143836-afd5-4096-a0a4-6418dee7630c', NOW(), NOW()),
+('Delta Service', 10, 30, 'mature_stage', 'Multiple developers, designers, marketers, support staff', 'A comprehensive service platform for businesses', 'dca4a2a8-f905-4fb0-98fb-6afccf6b7c7d', NOW(), NOW()),
+('Epsilon Tool', 6, 22, 'growth_stage', 'Full Stack Developer, Designer, Marketing Lead', 'An AI-powered tool for content creators', 'f9f07e2b-fde6-4fae-ab59-163735d79647', NOW(), NOW());
 
 -- 6. Products (depends on profile_id and category_id)
 INSERT INTO products (name, tagline, description, how_it_works, icon, url, status, profile_id, category_id, created_at, updated_at) VALUES

@@ -7,7 +7,9 @@ import {
   pgTable,
   text,
   timestamp,
+  uuid,
 } from "drizzle-orm/pg-core";
+import { profiles } from "~/entities/users";
 import { TEAM_PRODUCT_STAGE_OPTIONS } from "../config/teams.const";
 
 export const productStage = pgEnum(
@@ -19,7 +21,7 @@ export const productStage = pgEnum(
 );
 
 export const team = pgTable(
-  "team",
+  "teams",
   {
     team_id: bigint({ mode: "number" })
       .primaryKey()
@@ -32,6 +34,7 @@ export const team = pgTable(
     product_description: text().notNull(),
     created_at: timestamp().notNull().defaultNow(),
     updated_at: timestamp().notNull().defaultNow(),
+    team_leader_id: uuid().references(()=> profiles.profile_id, {onDelete: "cascade"}).notNull(),
   },
   (table) => [
     check("team_size_check", sql`${table.team_size} BETWEEN 1 AND 100`),

@@ -1,6 +1,6 @@
 import { AvatarImage } from "@radix-ui/react-avatar";
 import { Link } from "react-router";
-import { Avatar } from "~/common/components/ui/avatar";
+import { Avatar, AvatarFallback } from "~/common/components/ui/avatar";
 import { Badge } from "~/common/components/ui/badge";
 import { Button } from "~/common/components/ui/button";
 import {
@@ -14,7 +14,7 @@ import { LINK } from "~/common/config";
 interface TeamCardProps {
   id: string;
   leaderName: string;
-  leaderAvatarUrl: string;
+  leaderAvatarUrl: string | null;
   positions: string[];
   projectDescription: string;
 }
@@ -27,14 +27,15 @@ export const TeamCard = ({
   projectDescription,
 }: TeamCardProps) => {
   return (
-    <Link to={`${LINK.TEAM(id)}`}>
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-base leading-loose">
+    <Link to={`${LINK.TEAM(id)}`} className="h-full">
+      <Card className="h-full">
+        <CardHeader className="h-full">
+          <CardTitle className="text-base leading-loose h-full">
             <Badge variant="secondary">
               <span className="text-base">@{leaderName}</span>
               <Avatar className="size-5">
-                <AvatarImage src={leaderAvatarUrl} />
+                <AvatarFallback>{leaderName.slice(0, 2)}</AvatarFallback>
+                {leaderAvatarUrl && <AvatarImage src={leaderAvatarUrl} />}
               </Avatar>
             </Badge>
             <span> is looking for </span>
@@ -43,10 +44,10 @@ export const TeamCard = ({
                 {position}
               </Badge>
             ))}
-            <span> to {projectDescription}</span>
+            <span className="break-all line-clamp-2"> to {projectDescription}</span>
           </CardTitle>
         </CardHeader>
-        <CardFooter className="justify-end">
+        <CardFooter className="justify-end mt-auto">
           <Button className="cursor-pointer" variant="link">
             Join Team &rarr;
           </Button>

@@ -1,6 +1,6 @@
 {
-  "id": "90c65a56-c1a1-4c1c-85bf-3cb5c997612e",
-  "prevId": "e3461f65-b4f8-49e7-bf14-e26aad7022e6",
+  "id": "88f75b20-4060-48fb-bd39-13dc2476b88e",
+  "prevId": "90c65a56-c1a1-4c1c-85bf-3cb5c997612e",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -943,7 +943,7 @@
           "notNull": true,
           "identity": {
             "type": "always",
-            "name": "team_team_id_seq",
+            "name": "teams_team_id_seq",
             "schema": "public",
             "increment": "1",
             "startWith": "1",
@@ -1003,25 +1003,45 @@
           "primaryKey": false,
           "notNull": true,
           "default": "now()"
+        },
+        "team_leader": {
+          "name": "team_leader",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "teams_team_leader_profiles_profile_id_fk": {
+          "name": "teams_team_leader_profiles_profile_id_fk",
+          "tableFrom": "teams",
+          "tableTo": "profiles",
+          "columnsFrom": [
+            "team_leader"
+          ],
+          "columnsTo": [
+            "profile_id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "policies": {},
       "checkConstraints": {
         "team_size_check": {
           "name": "team_size_check",
-          "value": "\"team\".\"team_size\" BETWEEN 1 AND 100"
+          "value": "\"teams\".\"team_size\" BETWEEN 1 AND 100"
         },
         "equity_split_check": {
           "name": "equity_split_check",
-          "value": "\"team\".\"equity_split\" BETWEEN 1 AND 100"
+          "value": "\"teams\".\"equity_split\" BETWEEN 1 AND 100"
         },
         "product_description_check": {
           "name": "product_description_check",
-          "value": "LENGTH(\"team\".\"product_description\") <= 200"
+          "value": "LENGTH(\"teams\".\"product_description\") <= 200"
         }
       },
       "isRLSEnabled": false

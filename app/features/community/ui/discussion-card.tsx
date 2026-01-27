@@ -1,5 +1,6 @@
 import { Avatar, AvatarFallback } from "@radix-ui/react-avatar";
 import { ChevronUpIcon } from "lucide-react";
+import { DateTime } from "luxon";
 import { Link } from "react-router";
 import { AvatarImage } from "~/common/components/ui/avatar";
 import { Button } from "~/common/components/ui/button";
@@ -17,7 +18,7 @@ interface DiscussionCardProps {
   id: string;
   title: string;
   author: string;
-  authorAvatarUrl: string;
+  authorAvatarUrl: string|null;
   category: string;
   postedAt: string;
   expanded?: boolean;
@@ -35,24 +36,26 @@ export function DiscussionCard({
   votes = 0,
 }: DiscussionCardProps) {
   return (
-    <Link to={LINK.COMMUNITY(id)}>
+    <Link to={LINK.COMMUNITY(id)} className="h-full"> 
       <Card
         className={cn([
+          "h-full",
           expanded ? "flex flex-row items-center justify-start" : "",
         ])}
       >
-        <CardHeader className="flex w-full items-center gap-4">
+        <CardHeader className="flex w-full items-start gap-4 h-full">
           <Avatar className="size-10 shrink-0 overflow-hidden rounded-full shadow-md">
             <AvatarFallback>{author.slice(0, 2)}</AvatarFallback>
-            <AvatarImage src={authorAvatarUrl} alt={`${author} avatar`} />
+            {authorAvatarUrl && <AvatarImage src={authorAvatarUrl} alt={`${author} avatar`} />}            
           </Avatar>
-          <div className="flex flex-col justify-center gap-1">
-            <CardTitle className="text-lg">{title}</CardTitle>
-            <div className="text-muted-foreground flex gap-1">
+          <div className="flex flex-col w-full justify-start gap-1 h-full">
+            <CardTitle className="text-lg w-full line-clamp-2">{title}</CardTitle>
+            <div className="text-muted-foreground flex flex-wrap gap-1">
               <TypographySmall>{author}</TypographySmall>
+              <TypographySmall>·</TypographySmall>
               <TypographySmall>{category}</TypographySmall>
               <TypographySmall>·</TypographySmall>
-              <TypographySmall>{postedAt}</TypographySmall>
+              <TypographySmall>{DateTime.fromISO(postedAt).toRelative()}</TypographySmall>
             </div>
           </div>
         </CardHeader>

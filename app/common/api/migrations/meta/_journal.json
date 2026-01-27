@@ -78,6 +78,20 @@
       "when": 1769090121196,
       "tag": "0010_familiar_power_man",
       "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1769517638518,
+      "tag": "0011_glamorous_famine",
+      "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1769518981542,
+      "tag": "0012_late_goblin_queen",
+      "breakpoints": true
     }
   ]
 }

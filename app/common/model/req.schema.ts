@@ -22,7 +22,7 @@ export const yearlySchema = z.object({
 });
 
 export const querySchema = z.object({
-  query: z.string().optional().default(""),
+  query: z.string().optional(),
 });
 
 export const pageSchema = z.object({
@@ -58,3 +58,4 @@ export type DateType = z.infer<typeof dateTypeEnum>;
 export type PeriodType = z.infer<typeof periodEnum>;
 export type DateRange = z.infer<typeof dateRangeSchema>;
 export type Id = z.infer<typeof idSchema>
+export type Limit = z.infer<typeof limitSchema>

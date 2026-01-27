@@ -31,12 +31,12 @@ export const IdeaCard = ({
   claimed,
 }: IdeaCardProps) => {
   return (
-    <Link to={LINK.IDEA(id)}>
-      <Card>
-        <CardHeader>
+    <Link to={LINK.IDEA(id)} className="h-full">
+      <Card className="h-full">
+        <CardHeader className="h-full">
           <CardTitle
             className={cn([
-              "text-lg",
+              "text-lg line-clamp-3 h-full",
               claimed ? "bg-foreground selection:bg-foreground" : "",
             ])}
           >
@@ -51,7 +51,7 @@ export const IdeaCard = ({
             <TypographySmall>{DateTime.fromISO(postedAt).toRelative()}</TypographySmall>
           </div>
         </CardContent>
-        <CardFooter className="justify-end gap-2">
+        <CardFooter className="justify-end gap-2 mt-auto">
           <Button
             variant="outline"
             className="cursor-pointer"
