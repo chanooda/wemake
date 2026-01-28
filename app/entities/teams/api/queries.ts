@@ -1,8 +1,11 @@
-import { supabase } from "~/common/api"
-import type { Limit } from "~/common/model"
+import { supabase } from '~/common/api';
+import type { Limit } from '~/common/model';
 
-export const getTeams = async ({limit}:Limit) => {
-    const query = supabase.from("teams").select(`
+export const getTeams = async ({ limit }: Limit) => {
+ const query = supabase
+  .from('teams')
+  .select(
+   `
         team_id,
         roles,
         product_description,        
@@ -10,13 +13,15 @@ export const getTeams = async ({limit}:Limit) => {
             avatar,
             username
         )
-        `).limit(limit)
+        `,
+  )
+  .limit(limit);
 
-    const {data, error} = await query
+ const { data, error } = await query;
 
-    if(error){
-        throw new Error(error.message)
-    }
+ if (error) {
+  throw new Error(error.message);
+ }
 
-    return data
-}
+ return data;
+};

@@ -1,6 +1,6 @@
-import { Settings } from "luxon";
+import { Settings } from 'luxon';
 
 export const initialize = () => {
-  Settings.defaultLocale = "ko-KR";
-  Settings.defaultZone = "Asia/Seoul";
+ Settings.defaultLocale = 'ko-KR';
+ Settings.defaultZone = 'Asia/Seoul';
 };

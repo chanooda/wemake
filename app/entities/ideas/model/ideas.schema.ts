@@ -1,8 +1,8 @@
-import { z } from "zod";
-import { limitSchema } from "~/common/model";
+import { z } from 'zod';
+import { limitSchema } from '~/common/model';
 
 export const ideasSchema = z.object({
-    ...limitSchema.shape
+ ...limitSchema.shape,
 });
 
-export type Ideas = z.infer<typeof ideasSchema>
+export type Ideas = z.infer<typeof ideasSchema>;

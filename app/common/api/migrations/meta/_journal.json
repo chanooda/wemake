@@ -1,97 +1,97 @@
 {
-  "version": "7",
-  "dialect": "postgresql",
-  "entries": [
-    {
-      "idx": 0,
-      "version": "7",
-      "when": 1766753194395,
-      "tag": "0000_strong_wendell_vaughn",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1766804409653,
-      "tag": "0001_cultured_monster_badoon",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1766813286325,
-      "tag": "0002_glorious_onslaught",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "7",
-      "when": 1766816210925,
-      "tag": "0003_same_agent_zero",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "7",
-      "when": 1766816760839,
-      "tag": "0004_early_rumiko_fujikawa",
-      "breakpoints": true
-    },
-    {
-      "idx": 5,
-      "version": "7",
-      "when": 1766817477848,
-      "tag": "0005_optimal_maximus",
-      "breakpoints": true
-    },
-    {
-      "idx": 6,
-      "version": "7",
-      "when": 1766818140784,
-      "tag": "0006_magenta_sister_grimm",
-      "breakpoints": true
-    },
-    {
-      "idx": 7,
-      "version": "7",
-      "when": 1767697493046,
-      "tag": "0007_foamy_spyke",
-      "breakpoints": true
-    },
-    {
-      "idx": 8,
-      "version": "7",
-      "when": 1767790370541,
-      "tag": "0008_certain_silver_surfer",
-      "breakpoints": true
-    },
-    {
-      "idx": 9,
-      "version": "7",
-      "when": 1769086133347,
-      "tag": "0009_ordinary_carmella_unuscione",
-      "breakpoints": true
-    },
-    {
-      "idx": 10,
-      "version": "7",
-      "when": 1769090121196,
-      "tag": "0010_familiar_power_man",
-      "breakpoints": true
-    },
-    {
-      "idx": 11,
-      "version": "7",
-      "when": 1769517638518,
-      "tag": "0011_glamorous_famine",
-      "breakpoints": true
-    },
-    {
-      "idx": 12,
-      "version": "7",
-      "when": 1769518981542,
-      "tag": "0012_late_goblin_queen",
-      "breakpoints": true
-    }
-  ]
+ "version": "7",
+ "dialect": "postgresql",
+ "entries": [
+  {
+   "idx": 0,
+   "version": "7",
+   "when": 1766753194395,
+   "tag": "0000_strong_wendell_vaughn",
+   "breakpoints": true
+  },
+  {
+   "idx": 1,
+   "version": "7",
+   "when": 1766804409653,
+   "tag": "0001_cultured_monster_badoon",
+   "breakpoints": true
+  },
+  {
+   "idx": 2,
+   "version": "7",
+   "when": 1766813286325,
+   "tag": "0002_glorious_onslaught",
+   "breakpoints": true
+  },
+  {
+   "idx": 3,
+   "version": "7",
+   "when": 1766816210925,
+   "tag": "0003_same_agent_zero",
+   "breakpoints": true
+  },
+  {
+   "idx": 4,
+   "version": "7",
+   "when": 1766816760839,
+   "tag": "0004_early_rumiko_fujikawa",
+   "breakpoints": true
+  },
+  {
+   "idx": 5,
+   "version": "7",
+   "when": 1766817477848,
+   "tag": "0005_optimal_maximus",
+   "breakpoints": true
+  },
+  {
+   "idx": 6,
+   "version": "7",
+   "when": 1766818140784,
+   "tag": "0006_magenta_sister_grimm",
+   "breakpoints": true
+  },
+  {
+   "idx": 7,
+   "version": "7",
+   "when": 1767697493046,
+   "tag": "0007_foamy_spyke",
+   "breakpoints": true
+  },
+  {
+   "idx": 8,
+   "version": "7",
+   "when": 1767790370541,
+   "tag": "0008_certain_silver_surfer",
+   "breakpoints": true
+  },
+  {
+   "idx": 9,
+   "version": "7",
+   "when": 1769086133347,
+   "tag": "0009_ordinary_carmella_unuscione",
+   "breakpoints": true
+  },
+  {
+   "idx": 10,
+   "version": "7",
+   "when": 1769090121196,
+   "tag": "0010_familiar_power_man",
+   "breakpoints": true
+  },
+  {
+   "idx": 11,
+   "version": "7",
+   "when": 1769517638518,
+   "tag": "0011_glamorous_famine",
+   "breakpoints": true
+  },
+  {
+   "idx": 12,
+   "version": "7",
+   "when": 1769518981542,
+   "tag": "0012_late_goblin_queen",
+   "breakpoints": true
+  }
+ ]
 }

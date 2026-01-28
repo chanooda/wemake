@@ -1,1 +1,1 @@
-export * from "./req.schema";
+export * from './req.schema';

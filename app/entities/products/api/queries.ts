@@ -1,83 +1,145 @@
-import { DateTime } from "luxon";
-import { supabase } from "~/common/api/supabase";
+import { DateTime } from 'luxon';
+import { supabase } from '~/common/api/supabase';
+import { getPageRange, getPages } from '~/common/lib/api-helper';
+import type { DateRange, DateType, Id } from '~/common/model';
 import type {
-  DateRange,
-  DateType,
-} from "~/common/model";
-import type { GetProductsByDateRangeReq } from "../model/products-schema";
+ GetProductByQueryReq,
+ GetProductsByCategoryReq,
+ GetProductsByDateRangeReq,
+} from '../model/products-schema';
 
-const PAGE_SIZE = 1
+const PAGE_SIZE = 1;
+
+export const productListSelect = `
+  product_id,
+  name,
+  tagline,
+  views: status->views,
+  reviews: status->reviews,
+  upvotes: status->upvotes,
+  created_at,
+  updated_at
+`;
 
 export const getProductsByDateRange = async ({
-  from,
-  to,
-  limit,
-  page = 1,
+ from,
+ to,
+ limit,
+ page = 1,
 }: GetProductsByDateRangeReq) => {
-  const { data, error } = await supabase
-    .from("products")
-    .select(
-      `
-        product_id,
-        name,
-        description,
-        views: status->views,
-        reviews: status->reviews,
-        upvotes: status->upvotes,
-        created_at,
-        updated_at
+ const [start, end] = getPageRange(page, limit);
+
+ const { data, error } = await supabase
+  .from('products')
+  .select(productListSelect)
+  .order('status->reviews', { ascending: false })
+  .gte('created_at', from.toISO())
+  .lte('created_at', to.toISO())
+  .limit(limit)
+  .range(start, end);
+
+ if (error) {
+  throw new Error(error.message);
+ }
+
+ return data;
+};
+
+export const getProductsAllCountByDateRange = async ({ from, to }: DateRange) => {
+ const { count, error } = await supabase
+  .from('products')
+  .select(`product_id`, { count: 'exact', head: true })
+  .gte('created_at', from.toISO())
+  .lte('created_at', to.toISO());
+
+ if (error) {
+  throw new Error(error.message);
+ }
+ if (!count) return 0;
+
+ return count;
+};
+
+export const getProductsPagesByDateRange = async ({ from, to }: DateRange) => {
+ const count = await getProductsAllCountByDateRange({ from, to });
+ const pages = Math.ceil(count / PAGE_SIZE) || 1;
+
+ return pages;
+};
+
+export const getProductsByDate = async (dateType: DateType, limit = 7, page = 1) => {
+ return getProductsByDateRange({
+  from: DateTime.now().startOf(dateType),
+  to: DateTime.now().endOf(dateType),
+  limit,
+  page,
+ });
+};
+
+export const getCategories = async () => {
+ const { data, error } = await supabase.from('categories').select(`
+      category_id,
+      name,
+      description
+    `);
+ if (error) {
+  throw new Error(error.message);
+ }
+ return data;
+};
+
+export const getCategory = async ({ id }: Id) => {
+ const query = supabase
+  .from('categories')
+  .select(
+   `
+       category_id,
+       name,
+       description
     `,
-    )
-    .order("status->reviews", { ascending: false })
-    .gte("created_at", from.toISO())
-    .lte("created_at", to.toISO())         
-    .limit(limit)
-    .range((page - 1) * PAGE_SIZE, page * PAGE_SIZE - 1);
+  )
+  .eq('category_id', Number(id))
+  .single();
 
-  if (error) {
-    throw new Error(error.message);
-  }
+ const { data, error } = await query;
 
-  return data;
+ if (error) {
+  throw new Error(error.message);
+ }
+ return data;
 };
 
-export const getProductsAllCountByDateRange = async ({
-  from,
-  to,
-}: DateRange) => {
-  const { count, error } = await supabase
-    .from("products")
-    .select(`product_id`, { count: "exact", head: true })
-    .gte("created_at", from.toISO())
-    .lte("created_at", to.toISO());
+export const getProductsByCategory = async ({ id, limit, page = 1 }: GetProductsByCategoryReq) => {
+ const [start, end] = getPageRange(page, limit);
+ const query = supabase
+  .from('products')
+  .select(productListSelect, { count: 'exact' })
+  .eq('category_id', Number(id))
+  .limit(limit)
+  .range(start, end);
 
-  if (error) {
-    throw new Error(error.message);
-  }
-  if (!count) return 0;
+ const { data, error, count } = await query;
+ if (error) {
+  throw new Error(error.message);
+ }
 
-  return count;
+ return { data, meta: { count: count || 0, pages: getPages(count || 0, PAGE_SIZE) } };
 };
 
-export const getProductsPagesByDateRange = async ({
-  from,
-  to,
-}: DateRange) => {
-  const count = await getProductsAllCountByDateRange({ from, to });
-  const pages = Math.ceil(count / PAGE_SIZE) || 1;
+export const getProductByQuery = async ({ query, limit, page = 1 }: GetProductByQueryReq) => {
+ const [start, end] = getPageRange(page, limit);
+ const productsByQuery = supabase
+  .from('products')
+  .select(productListSelect, { count: 'exact' })
+  .or(`name.ilike.%${query}%, tagline.ilike.%${query}%`)
+  .limit(limit)
+  .range(start, end);
 
-  return pages;
-};
+ const { data, error, count } = await productsByQuery;
 
-export const getProductsByDate = async (
-  dateType: DateType,
-  limit = 7,
-  page = 1,
-) => {
-  return getProductsByDateRange({
-    from: DateTime.now().startOf(dateType),
-    to: DateTime.now().endOf(dateType),
-    limit,
-    page,
-  });
+ if (error) {
+  throw new Error(error.message);
+ }
+
+ return { data, meta: { count: count || 0, pages: getPages(count || 0, PAGE_SIZE) } };
 };

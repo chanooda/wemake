@@ -1,3 +1,3 @@
-export * from "./api/schema";
+export * from './api/schema';
 
-export * from "./model/products-schema";
+export * from './model/products-schema';

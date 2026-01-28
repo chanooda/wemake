@@ -1,4 +1,4 @@
-export * from "./api/queries";
-export * from "./api/schema";
+export * from './api/queries';
+export * from './api/schema';
 
-export * from "./model/ideas.schema";
+export * from './model/ideas.schema';

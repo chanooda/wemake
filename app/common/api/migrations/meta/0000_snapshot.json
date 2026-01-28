@@ -1,168 +1,160 @@
 {
-  "id": "0ce6eade-0028-4d0e-a071-8170be2a45d6",
-  "prevId": "00000000-0000-0000-0000-000000000000",
-  "version": "7",
-  "dialect": "postgresql",
-  "tables": {
-    "public.jobs": {
-      "name": "jobs",
-      "schema": "",
-      "columns": {
-        "job_id": {
-          "name": "job_id",
-          "type": "bigint",
-          "primaryKey": true,
-          "notNull": true,
-          "identity": {
-            "type": "always",
-            "name": "jobs_job_id_seq",
-            "schema": "public",
-            "increment": "1",
-            "startWith": "1",
-            "minValue": "1",
-            "maxValue": "9223372036854775807",
-            "cache": "1",
-            "cycle": false
-          }
-        },
-        "position": {
-          "name": "position",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "overview": {
-          "name": "overview",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "responsibilities": {
-          "name": "responsibilities",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "qualifications": {
-          "name": "qualifications",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "benefits": {
-          "name": "benefits",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "skills": {
-          "name": "skills",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "company_name": {
-          "name": "company_name",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "company_logo_url": {
-          "name": "company_logo_url",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "company_hq": {
-          "name": "company_hq",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "company_location": {
-          "name": "company_location",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "apply_url": {
-          "name": "apply_url",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "job_type": {
-          "name": "job_type",
-          "type": "job_type",
-          "typeSchema": "public",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "location": {
-          "name": "location",
-          "type": "locations",
-          "typeSchema": "public",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "salary_range": {
-          "name": "salary_range",
-          "type": "salary_range",
-          "typeSchema": "public",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    }
-  },
-  "enums": {
-    "public.job_type": {
-      "name": "job_type",
+ "id": "0ce6eade-0028-4d0e-a071-8170be2a45d6",
+ "prevId": "00000000-0000-0000-0000-000000000000",
+ "version": "7",
+ "dialect": "postgresql",
+ "tables": {
+  "public.jobs": {
+   "name": "jobs",
+   "schema": "",
+   "columns": {
+    "job_id": {
+     "name": "job_id",
+     "type": "bigint",
+     "primaryKey": true,
+     "notNull": true,
+     "identity": {
+      "type": "always",
+      "name": "jobs_job_id_seq",
       "schema": "public",
-      "values": [
-        "full-time",
-        "part-time",
-        "remote"
-      ]
+      "increment": "1",
+      "startWith": "1",
+      "minValue": "1",
+      "maxValue": "9223372036854775807",
+      "cache": "1",
+      "cycle": false
+     }
     },
-    "public.locations": {
-      "name": "locations",
-      "schema": "public",
-      "values": [
-        "remote",
-        "in-person",
-        "hybrid"
-      ]
+    "position": {
+     "name": "position",
+     "type": "text",
+     "primaryKey": false,
+     "notNull": true
     },
-    "public.salary_range": {
-      "name": "salary_range",
-      "schema": "public",
-      "values": [
-        "0 - 50000",
-        "50000 - 70000",
-        "70000 - 100000",
-        "100000 - 120000",
-        "120000 - 150000",
-        "150000 - 250000",
-        "250000+"
-      ]
+    "overview": {
+     "name": "overview",
+     "type": "text",
+     "primaryKey": false,
+     "notNull": true
+    },
+    "responsibilities": {
+     "name": "responsibilities",
+     "type": "text",
+     "primaryKey": false,
+     "notNull": true
+    },
+    "qualifications": {
+     "name": "qualifications",
+     "type": "text",
+     "primaryKey": false,
+     "notNull": true
+    },
+    "benefits": {
+     "name": "benefits",
+     "type": "text",
+     "primaryKey": false,
+     "notNull": true
+    },
+    "skills": {
+     "name": "skills",
+     "type": "text",
+     "primaryKey": false,
+     "notNull": true
+    },
+    "company_name": {
+     "name": "company_name",
+     "type": "text",
+     "primaryKey": false,
+     "notNull": true
+    },
+    "company_logo_url": {
+     "name": "company_logo_url",
+     "type": "text",
+     "primaryKey": false,
+     "notNull": true
+    },
+    "company_hq": {
+     "name": "company_hq",
+     "type": "text",
+     "primaryKey": false,
+     "notNull": true
+    },
+    "company_location": {
+     "name": "company_location",
+     "type": "text",
+     "primaryKey": false,
+     "notNull": true
+    },
+    "apply_url": {
+     "name": "apply_url",
+     "type": "text",
+     "primaryKey": false,
+     "notNull": true
+    },
+    "job_type": {
+     "name": "job_type",
+     "type": "job_type",
+     "typeSchema": "public",
+     "primaryKey": false,
+     "notNull": true
+    },
+    "location": {
+     "name": "location",
+     "type": "locations",
+     "typeSchema": "public",
+     "primaryKey": false,
+     "notNull": true
+    },
+    "salary_range": {
+     "name": "salary_range",
+     "type": "salary_range",
+     "typeSchema": "public",
+     "primaryKey": false,
+     "notNull": true
     }
-  },
-  "schemas": {},
-  "sequences": {},
-  "roles": {},
-  "policies": {},
-  "views": {},
-  "_meta": {
-    "columns": {},
-    "schemas": {},
-    "tables": {}
+   },
+   "indexes": {},
+   "foreignKeys": {},
+   "compositePrimaryKeys": {},
+   "uniqueConstraints": {},
+   "policies": {},
+   "checkConstraints": {},
+   "isRLSEnabled": false
   }
+ },
+ "enums": {
+  "public.job_type": {
+   "name": "job_type",
+   "schema": "public",
+   "values": ["full-time", "part-time", "remote"]
+  },
+  "public.locations": {
+   "name": "locations",
+   "schema": "public",
+   "values": ["remote", "in-person", "hybrid"]
+  },
+  "public.salary_range": {
+   "name": "salary_range",
+   "schema": "public",
+   "values": [
+    "0 - 50000",
+    "50000 - 70000",
+    "70000 - 100000",
+    "100000 - 120000",
+    "120000 - 150000",
+    "150000 - 250000",
+    "250000+"
+   ]
+  }
+ },
+ "schemas": {},
+ "sequences": {},
+ "roles": {},
+ "policies": {},
+ "views": {},
+ "_meta": {
+  "columns": {},
+  "schemas": {},
+  "tables": {}
+ }
 }
