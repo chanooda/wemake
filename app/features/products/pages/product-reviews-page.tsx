@@ -92,7 +92,7 @@ export default function ProductReviewsPage() {
       </div>
      </div>
      <div>
-      <Rating />
+      <Rating value={4.5} />
      </div>
      <div>
       <p className="text-muted-foreground text-sm">

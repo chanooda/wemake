@@ -143,3 +143,17 @@ export const getProductByQuery = async ({ query, limit, page = 1 }: GetProductBy
 
  return { data, meta: { count: count || 0, pages: getPages(count || 0, PAGE_SIZE) } };
 };
+
+export const getProduct = async ({ id }: Id) => {
+ const { data, error } = await supabase
+  .from('product_view')
+  .select('*')
+  .eq('product_id', Number(id))
+  .single();
+
+ if (error) {
+  throw new Error(error.message);
+ }
+
+ return data;
+};
