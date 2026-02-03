@@ -1,10 +1,8 @@
-import { Avatar } from '@radix-ui/react-avatar';
 import { StarIcon } from 'lucide-react';
 import { useState } from 'react';
+import { data, useOutletContext } from 'react-router';
 import { LabelSet } from '~/common/components/LabelSet';
-import { Rating } from '~/common/components/rating';
 import { Textarea } from '~/common/components/textarea';
-import { AvatarFallback, AvatarImage } from '~/common/components/ui/avatar';
 import { Button } from '~/common/components/ui/button';
 import {
  Dialog,
@@ -16,15 +14,35 @@ import {
  DialogTrigger,
 } from '~/common/components/ui/dialog';
 import { H2 } from '~/common/components/ui/typography';
+import { idSchema } from '~/common/model';
+import { getProductReviews, type getProduct } from '~/entities/products/api/queries';
+import { ReviewCard } from '../ui/review-card';
+import type { Route } from './+types/product-reviews-page';
 
-export default function ProductReviewsPage() {
+export const loader = async ({ params }: Route.LoaderArgs) => {
+ const { productId } = params;
+
+ const { success, data: parsedData } = idSchema.safeParse({ id: productId });
+
+ if (!success) {
+  throw data({ error_code: 'invalid_params' }, { status: 400 });
+ }
+
+ const reviews = await getProductReviews({ id: parsedData.id });
+ return { reviews };
+};
+
+export default function ProductReviewsPage({ loaderData }: Route.ComponentProps) {
+ const { product } = useOutletContext<{ product: Awaited<ReturnType<typeof getProduct>> }>();
+ const { reviews } = loaderData;
+
  const [rating, setRating] = useState(0);
  const [hoveredRating, setHoveredRating] = useState(0);
 
  return (
   <div className="w-full max-w-xl">
    <div className="flex items-center justify-between">
-    <H2 className="border-0 pb-0 text-lg">10 Reviews</H2>
+    <H2 className="border-0 pb-0 text-lg">{product.reviews} Reviews</H2>
     <Dialog>
      <DialogTrigger asChild>
       <Button variant="outline">Write a review</Button>
@@ -80,27 +98,17 @@ export default function ProductReviewsPage() {
     </Dialog>
    </div>
    <div className="mt-4 flex flex-col gap-4">
-    <div className="flex flex-col gap-4">
-     <div className="flex items-center gap-2">
-      <Avatar className="h-10 w-10">
-       <AvatarFallback />
-       <AvatarImage src="https://github.com/facebook.png" />
-      </Avatar>
-      <div className="flex flex-col">
-       <span className="text-sm font-semibold">John Doe</span>
-       <span className="text-muted-foreground text-xs">@username • 2 days ago</span>
-      </div>
-     </div>
-     <div>
-      <Rating value={4.5} />
-     </div>
-     <div>
-      <p className="text-muted-foreground text-sm">
-       This product is amazing! It has changed the way I work and has significantly improved my
-       productivity. Highly recommend it to anyone looking for a solution to their problems.
-      </p>
-     </div>
-    </div>
+    {reviews.map((review) => (
+     <ReviewCard
+      key={review.review_id}
+      name={review.profile.name}
+      username={review.profile.username}
+      avatar={review.profile.avatar}
+      created_at={review.created_at}
+      rating={review.rating}
+      content={review.review}
+     />
+    ))}
    </div>
   </div>
  );

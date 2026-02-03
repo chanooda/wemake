@@ -157,3 +157,29 @@ export const getProduct = async ({ id }: Id) => {
 
  return data;
 };
+
+export const getProductReviews = async ({ id }: Id) => {
+ const { data, error } = await supabase
+  .from('reviews')
+  .select(
+   `
+    review_id,
+    rating,
+    review,
+    created_at,
+    profile:profiles!inner(
+      profile_id,
+      name,
+      username,
+      avatar
+    )
+  `,
+  )
+  .eq('product_id', Number(id));
+
+ if (error) {
+  throw new Error(error.message);
+ }
+
+ return data;
+};
