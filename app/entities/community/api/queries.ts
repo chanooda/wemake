@@ -50,3 +50,19 @@ export const getPosts = async ({
  }
  return { data, meta: { total: count || 0, pages: getPages(count || 0, PAGE_SIZE) } };
 };
+
+export const getPost = async (postId: number) => {
+ const { data, error } = await supabase
+  .from('community_post_view')
+  .select('*')
+  .eq('post_id', postId)
+  .single();
+
+ console.log(data);
+
+ if (error) {
+  throw new Error(error.message);
+ }
+
+ return data;
+};

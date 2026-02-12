@@ -25,3 +25,26 @@ export const getTeams = async ({ limit }: Limit) => {
 
  return data;
 };
+
+export const getTeam = async (id: number) => {
+ const { data, error } = await supabase
+  .from('teams')
+  .select(
+   `
+    *,
+    team_leader:profiles!inner (
+            avatar,
+            name,
+            role
+        )
+    `,
+  )
+  .eq('team_id', id)
+  .single();
+
+ if (error) {
+  throw new Error(error.message);
+ }
+
+ return data;
+};

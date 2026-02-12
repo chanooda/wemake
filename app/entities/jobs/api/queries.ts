@@ -22,3 +22,13 @@ export const getJobs = async ({ limit, time, location, salary }: GetJobsReq) => 
 
  return data;
 };
+
+export const getJob = async (id: number) => {
+ const { data, error } = await supabase.from('jobs').select('*').eq('job_id', id).single();
+
+ if (error) {
+  throw new Error(error.message);
+ }
+
+ return data;
+};

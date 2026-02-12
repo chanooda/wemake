@@ -1,96 +1,96 @@
+import { DateTime } from 'luxon';
+import { data } from 'react-router';
 import { Badge } from '~/common/components/ui/badge';
 import { Button } from '~/common/components/ui/button';
 import { Card, CardContent, CardFooter } from '~/common/components/ui/card';
 import { TypographyLarge, TypographyMuted } from '~/common/components/ui/typography';
 import { getMetadataTitle } from '~/common/config';
+import { idSchema } from '~/common/model';
+import { getJob } from '~/entities/jobs';
+import { JOBS_SALARY_RANGE } from '../config/jobs-filter';
 import type { Route } from './+types/job-page';
 
-export const meta = ({ params: { ideaId } }: Route.MetaArgs) => {
+export const meta = ({ data: { job } }: Route.MetaArgs) => {
  return [
-  { title: getMetadataTitle(`Job Details`) },
+  { title: getMetadataTitle(`${job.position} at ${job.company_name}`) },
   {
    name: 'description',
-   content: `This is the details page for idea #${ideaId}`,
+   content: `This is the details page for job ${job.position} at ${job.company_name}`,
   },
  ];
 };
 
-export default function JobPage() {
+export const loader = async ({ params }: Route.LoaderArgs) => {
+ const { jobId } = params;
+
+ const { success, data: parsedData } = idSchema.safeParse({ id: jobId });
+
+ if (!success) {
+  throw data({ error_code: 'invalid_params' }, { status: 400 });
+ }
+
+ const job = await getJob(parsedData.id);
+
+ if (!job) {
+  throw data({ error_code: 'not Found' }, { status: 404 });
+ }
+
+ return { job };
+};
+export default function JobPage({ loaderData }: Route.ComponentProps) {
+ const { job } = loaderData;
+
  return (
   <div>
    <div className="from-primary/20 to-primary/50 rounded-md bg-gradient-to-l py-20" />
    <div className="grid grid-cols-6 items-start">
     <div className="col-span-4 -mt-16">
      <img src="https://github.com/facebook.png" className="relative left-8 size-32 rounded-full" />
-     <h2 className="mt-2 text-3xl font-bold">Software Engineer</h2>
-     <TypographyMuted className="text-base">Meta Inc.</TypographyMuted>
+     <h2 className="mt-2 text-3xl font-bold">{job.position}</h2>
+     <TypographyMuted className="text-base">{job.company_name}</TypographyMuted>
      <div className="mt-8 flex flex-wrap gap-2">
-      {['Full-time', 'Remote'].map((type) => (
-       <Badge variant="outline" key={type}>
-        {type}
-       </Badge>
-      ))}
+      <Badge variant="outline" key={job.job_type}>
+       {job.job_type}
+      </Badge>
+      <Badge variant="outline" key={job.location}>
+       {job.location}
+      </Badge>
      </div>
      <div className="mt-8 flex flex-col gap-8">
       <div className="flex flex-col gap-2">
        <h3 className="text-xl font-bold">Overview</h3>
-       <p>
-        We are looking for a Software Engineer with a passion for building scalable and efficient
-        systems. You will be responsible for designing and implementing new features and improving
-        existing ones.
-       </p>
+       <p>{job.overview}</p>
       </div>
       <div className="flex flex-col gap-2">
        <h3 className="text-xl font-bold">Responsibilities</h3>
        <ul className="list-inside list-disc">
-        <li>Design and implement new features and improve existing ones.</li>
-        <li>Troubleshoot and debug applications.</li>
-        <li>Optimize applications for maximum speed and scalability.</li>
-        <li>Ensure the technical feasibility of UI/UX designs.</li>
-        <li>Write clean, maintainable code.</li>
-        <li>Follow best practices and industry standards.</li>
-        <li>Collaborate with other team members and stakeholders.</li>
-        <li>Participate in code reviews and provide feedback.</li>
-        <li>Stay up-to-date with new technologies and trends.</li>
-        <li>Participate in team meetings and provide feedback.</li>
-        <li>Participate in team meetings and provide feedback.</li>
+        {job.responsibilities.split(',').map((responsibility) => (
+         <li key={responsibility}>{responsibility}</li>
+        ))}
        </ul>
       </div>
       <div className="flex flex-col gap-2">
        <h3 className="text-xl font-bold">Qualifications</h3>
        <ul className="list-inside list-disc">
-        <li>Bachelor's degree in Computer Science or related field.</li>
-        <li>3+ years of experience in software development.</li>
-        <li>Strong understanding of software development principles.</li>
-        <li>Strong understanding of software development principles.</li>
+        {job.qualifications.split(',').map((qualification) => (
+         <li key={qualification}>{qualification}</li>
+        ))}
        </ul>
       </div>
       <div className="flex flex-col gap-2">
        <h3 className="text-xl font-bold">Benefits</h3>
        <ul className="list-inside list-disc">
-        <li>Flexible working hours.</li>
-        <li>Remote work options.</li>
-        <li>Health insurance.</li>
-        <li>Dental insurance.</li>
-        <li>Vision insurance.</li>
-        <li>Retirement benefits.</li>
-        <li>Paid time off.</li>
-        <li>Parental leave.</li>
-        <li>Flexible spending account.</li>
-        <li>Employee assistance program.</li>
+        {job.benefits.split(',').map((benefit) => (
+         <li key={benefit}>{benefit}</li>
+        ))}
        </ul>
       </div>
       <div className="flex flex-col gap-2">
        <h3 className="text-xl font-bold">Skills</h3>
        <ul className="list-inside list-disc">
-        <li>JavaScript</li>
-        <li>React</li>
-        <li>Node.js</li>
-        <li>Express</li>
-        <li>MongoDB</li>
-        <li>PostgreSQL</li>
-        <li>Docker</li>
-        <li>Kubernetes</li>
+        {job.skills.split(',').map((skill) => (
+         <li key={skill}>{skill}</li>
+        ))}
        </ul>
       </div>
      </div>
@@ -99,17 +99,21 @@ export default function JobPage() {
      <Card className="mt-18">
       <CardContent>
        <TypographyMuted>Avg. Salary</TypographyMuted>
-       <TypographyLarge>$100,000 ~ $120,000</TypographyLarge>
+       <TypographyLarge>
+        {JOBS_SALARY_RANGE.find((range) => range.value === job.salary_range)?.label}
+       </TypographyLarge>
        <TypographyMuted className="mt-2">Location</TypographyMuted>
-       <TypographyLarge>Remote</TypographyLarge>
+       <TypographyLarge>{job.location}</TypographyLarge>
        <TypographyMuted className="mt-2">Type</TypographyMuted>
-       <TypographyLarge>Full-time</TypographyLarge>
+       <TypographyLarge>{job.job_type}</TypographyLarge>
       </CardContent>
       <CardFooter className="flex flex-col gap-4">
        <div className="flex w-full justify-start gap-2">
-        <TypographyMuted>Posted 2 days ago</TypographyMuted>
+        <TypographyMuted>
+         Posted {DateTime.fromISO(job.created_at).toRelative()} ago
+        </TypographyMuted>
         <TypographyMuted>•</TypographyMuted>
-        <TypographyMuted>395 views</TypographyMuted>
+        <TypographyMuted>123 views</TypographyMuted>
        </div>
        <Button className="w-full">Apply now</Button>
       </CardFooter>
