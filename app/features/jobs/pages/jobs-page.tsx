@@ -24,8 +24,6 @@ export const loader = async ({ request }: Route.LoaderArgs) => {
 
  const jobs = await getJobs({ limit: 10, ...data });
 
- console.log(jobs);
-
  return { jobs };
 };
 

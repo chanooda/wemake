@@ -51,8 +51,6 @@ export const loader = async ({ params, request }: Route.LoaderArgs) => {
 export default function CategoryPage({ loaderData }: Route.ComponentProps) {
  const { category, products } = loaderData;
 
- console.log(products);
-
  return (
   <div>
    <PageTitle title={category.name} subTitle={category.description} />

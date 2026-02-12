@@ -7,10 +7,22 @@ import { Textarea } from '~/common/components/ui/textarea';
 
 interface ReplyProps {
  author: string;
- authorAvatarUrl: string;
+ authorAvatarUrl: string | null;
  postedAt: string;
  content: string;
  topLevel?: boolean;
+ replies?: {
+  post_reply_id: number;
+  reply: string;
+  created_at: string;
+  updated_at: string;
+  user: {
+   name: string;
+   avatar: string | null;
+   username: string;
+   profile_id: string;
+  };
+ }[];
 }
 
 export const Reply = ({
@@ -19,6 +31,7 @@ export const Reply = ({
  postedAt,
  content,
  topLevel = false,
+ replies,
 }: ReplyProps) => {
  const [isReplyOpen, setIsReplyOpen] = useState(false);
 
@@ -30,10 +43,10 @@ export const Reply = ({
   <div className="flex flex-col gap-4">
    <div className="flex gap-4">
     <Avatar className="size-12">
-     <AvatarFallback>CN</AvatarFallback>
-     <AvatarImage src={authorAvatarUrl} />
+     <AvatarFallback>{author.charAt(0)}</AvatarFallback>
+     {authorAvatarUrl && <AvatarImage src={authorAvatarUrl} />}
     </Avatar>
-    <div className="flex flex-col gap-2">
+    <div className="flex w-full flex-col gap-2">
      <div className="flex items-center gap-2">
       <span className="text-lg font-bold">{author}</span>
       <span>•</span>
@@ -61,12 +74,15 @@ export const Reply = ({
    )}
    {topLevel && (
     <div className="pl-12">
-     <Reply
-      author="chanooda"
-      authorAvatarUrl="https://github.com/chanooda.png"
-      postedAt="12 hours ago"
-      content="Hello, I'm looking for the best productivity tool for my work. I'm a developer and I need a tool that can help me with my work. and I need a tool that can help me with my work. and I need a tool that can help me with my work. for more information, please contact me at chanooda@gmail.com"
-     />
+     {replies?.map((reply) => (
+      <Reply
+       key={reply.post_reply_id}
+       author={reply.user.name}
+       authorAvatarUrl={reply.user.avatar}
+       postedAt={reply.created_at}
+       content={reply.reply}
+      />
+     ))}
     </div>
    )}
   </div>

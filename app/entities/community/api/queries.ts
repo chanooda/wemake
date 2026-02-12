@@ -58,11 +58,36 @@ export const getPost = async (postId: number) => {
   .eq('post_id', postId)
   .single();
 
- console.log(data);
-
  if (error) {
   throw new Error(error.message);
  }
 
+ return data;
+};
+
+export const getReplies = async (postId: number) => {
+ const query = `post_reply_id,
+        reply,
+        created_at,
+        updated_at,
+        user:profiles(
+            profile_id,
+            name,
+            username,
+            avatar
+        )`;
+
+ const { data, error } = await supabase
+  .from('post_replies')
+  .select(
+   `${query},
+     post_replies(${query})
+    `,
+  )
+  .eq('post_id', postId);
+
+ if (error) {
+  throw new Error(error.message);
+ }
  return data;
 };

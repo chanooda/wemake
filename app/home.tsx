@@ -39,8 +39,6 @@ export const loader = async () => {
 export default function Home({ loaderData }: Route.ComponentProps) {
  const { products, jobs, ideas, discussions, teams } = loaderData;
 
- console.log(teams);
-
  return (
   <div className="flex flex-col gap-24">
    <div className="3xl:grid-cols-5 grid auto-rows-fr grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">

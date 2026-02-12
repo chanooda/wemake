@@ -16,7 +16,7 @@ import { Textarea } from '~/common/components/ui/textarea';
 import { TypographySmall } from '~/common/components/ui/typography';
 import { LINK, getMetadataTitle } from '~/common/config';
 import { idSchema } from '~/common/model';
-import { getPost } from '~/entities/community';
+import { getPost, getReplies } from '~/entities/community';
 import { Reply } from '../ui/reply';
 import type { Route } from './+types/post-page';
 
@@ -39,16 +39,23 @@ export const loader = async ({ params }: Route.LoaderArgs) => {
   throw data({ error_code: 'invalid_params' }, { status: 400 });
  }
 
- const post = await getPost(parsedData.id);
+ const postFetch = getPost(parsedData.id);
+ const repliesFetch = getReplies(parsedData.id);
 
+ const [post, replies] = await Promise.all([postFetch, repliesFetch]);
+
+ if (!replies) {
+  throw data({ error_code: 'not Found' }, { status: 404 });
+ }
  if (!post) {
   throw data({ error_code: 'not Found' }, { status: 404 });
  }
- return { post };
+
+ return { post, replies };
 };
 
 const PostPage = ({ loaderData }: Route.ComponentProps) => {
- const { post } = loaderData;
+ const { post, replies } = loaderData;
  return (
   <div>
    <Breadcrumb>
@@ -107,15 +114,19 @@ const PostPage = ({ loaderData }: Route.ComponentProps) => {
        </div>
       </Form>
       <div>
-       <span className="font-bold">10 Replies</span>
+       <span className="font-bold">{replies.length} Replies</span>
        <div className="mt-8 flex flex-col gap-4">
-        <Reply
-         topLevel
-         author="chanooda"
-         authorAvatarUrl="https://github.com/chanooda.png"
-         postedAt="12 hours ago"
-         content="Hello, I'm looking for the best productivity tool for my work. I'm a developer and I need a tool that can help me with my work. and I need a tool that can help me with my work. and I need a tool that can help me with my work. for more information, please contact me at chanooda@gmail.com"
-        />
+        {replies.map((reply) => (
+         <Reply
+          key={reply.post_reply_id}
+          author={reply.user.name}
+          authorAvatarUrl={reply.user.avatar}
+          postedAt={reply.created_at}
+          content={reply.reply}
+          topLevel
+          replies={reply.post_replies}
+         />
+        ))}
        </div>
       </div>
      </div>
